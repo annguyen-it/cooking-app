@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imgFood"
         android:layout_width="174dp"
         android:layout_height="129dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -16,29 +16,29 @@
         app:srcCompat="@android:drawable/btn_star_big_on" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/txtNameFood"
         android:layout_width="175dp"
         android:layout_height="30dp"
         android:layout_marginTop="16dp"
         android:text="NameFood"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="@+id/imgFood"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/imgFood" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/txtNameOwner"
         android:layout_width="176dp"
         android:layout_height="26dp"
         android:layout_marginTop="8dp"
         android:text="owner : "
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="@+id/txtNameFood"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/txtNameFood" />
 
     <RatingBar
         android:id="@+id/ratingBar"
@@ -51,8 +51,8 @@
         android:scaleX="0.4"
         android:scaleY="0.5"
         android:transformPivotX="0dp"
-        app:layout_constraintEnd_toEndOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="@+id/txtNameOwner"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/txtNameOwner" />
 </androidx.constraintlayout.widget.ConstraintLayout>
