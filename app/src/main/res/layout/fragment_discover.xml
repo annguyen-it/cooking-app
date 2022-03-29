@@ -6,17 +6,128 @@
     android:layout_height="match_parent"
     tools:context=".ui.discover.DiscoverFragment">
 
-    <TextView
-        android:id="@+id/text_home"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <SearchView
+        android:id="@+id/searchView"
+        android:layout_width="323dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="39dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="49dp"
+        android:layout_marginBottom="17dp"
+        app:layout_constraintBottom_toTopOf="@+id/ckbDoAnChay"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtDoAnChay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="21dp"
+        android:text="@string/DoAnChay"
+        app:layout_constraintBottom_toTopOf="@+id/txtDoKho"
+        app:layout_constraintEnd_toStartOf="@+id/ckbDoAnChay"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchView" />
+
+    <TextView
+        android:id="@+id/txtDoKho"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginBottom="36dp"
+        android:text="@string/DoKho"
+        app:layout_constraintBottom_toTopOf="@+id/txtQuocGia"
+        app:layout_constraintEnd_toStartOf="@+id/rdbDoKho1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtDoAnChay" />
+
+    <TextView
+        android:id="@+id/txtQuocGia"
+        android:layout_width="73dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="140dp"
+        android:text="@string/QuocGia"
+        app:layout_constraintBottom_toTopOf="@+id/grvTrangChu"
+        app:layout_constraintEnd_toStartOf="@+id/scrvQuocGia"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtDoKho" />
+
+    <GridView
+        android:id="@+id/grvTrangChu"
+        android:layout_width="334dp"
+        android:layout_height="384dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnLoc" />
+
+    <CheckBox
+        android:id="@+id/ckbDoAnChay"
+        android:layout_width="46dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="17dp"
+        app:layout_constraintStart_toEndOf="@+id/txtDoAnChay"
+        app:layout_constraintTop_toBottomOf="@+id/searchView"
+        tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
+
+    <RadioButton
+        android:id="@+id/rdbDoKho1"
+        android:layout_width="37dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="21dp"
+        app:layout_constraintStart_toEndOf="@+id/txtDoKho"
+        app:layout_constraintTop_toBottomOf="@+id/ckbDoAnChay"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <RadioButton
+        android:id="@+id/rdoDoKho2"
+        android:layout_width="31dp"
+        android:layout_height="19dp"
+        android:layout_marginTop="21dp"
+        app:layout_constraintStart_toEndOf="@+id/rdbDoKho1"
+        app:layout_constraintTop_toBottomOf="@+id/ckbDoAnChay"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <RadioButton
+        android:id="@+id/rdbDoKho3"
+        android:layout_width="34dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="67dp"
+        app:layout_constraintStart_toEndOf="@+id/rdoDoKho2"
+        app:layout_constraintTop_toBottomOf="@+id/searchView"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <Button
+        android:id="@+id/btnLoc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="143dp"
+        android:layout_marginEnd="180dp"
+        android:layout_marginBottom="28dp"
+        android:text="@string/Loc"
+        app:layout_constraintBottom_toTopOf="@+id/grvTrangChu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrvQuocGia" />
+
+    <ScrollView
+        android:id="@+id/scrvQuocGia"
+        android:layout_width="138dp"
+        android:layout_height="28dp"
+        android:layout_marginEnd="132dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnLoc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txtQuocGia"
+        app:layout_constraintTop_toBottomOf="@+id/rdbDoKho1"
+        tools:ignore="SpeakableTextPresentCheck" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
