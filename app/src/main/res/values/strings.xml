@@ -10,4 +10,8 @@
     <string name="QuocGia">Quốc gia</string>
     <string name="DoAnChay">Đồ ăn chay</string>
     <string name="Loc">Lọc</string>
+    <string name="Buoc1">Bước 1</string>
+    <string name="mota">Mô tả</string>
+    <string name="tenbuoc">Tên bước</string>
+    <string name="todo">TODO</string>
 </resources>
