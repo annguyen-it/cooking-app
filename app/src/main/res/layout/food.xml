@@ -7,8 +7,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="194dp"
-        android:layout_height="141dp"
+        android:layout_width="174dp"
+        android:layout_height="129dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -17,11 +17,11 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="194dp"
-        android:layout_height="53dp"
+        android:layout_width="175dp"
+        android:layout_height="30dp"
         android:layout_marginTop="16dp"
         android:text="NameFood"
-        android:textSize="30sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/imageView"
         app:layout_constraintHorizontal_bias="0.0"
@@ -30,23 +30,29 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="192dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="12dp"
+        android:layout_width="176dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="8dp"
         android:text="owner : "
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/textView"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <RatingBar
         android:id="@+id/ratingBar"
-        android:layout_width="189dp"
-        android:layout_height="58dp"
+        style="?android:attr/ratingBarStyleIndicator"
+        android:layout_width="176dp"
+        android:layout_height="32dp"
         android:max="5"
+        android:progressTint="@android:color/holo_orange_light"
         android:rating="3.5"
-        android:scaleX="0.5"
+        android:scaleX="0.4"
         android:scaleY="0.5"
+        android:transformPivotX="0dp"
         app:layout_constraintEnd_toEndOf="@+id/textView2"
-        tools:layout_editor_absoluteY="273dp" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 </androidx.constraintlayout.widget.ConstraintLayout>
