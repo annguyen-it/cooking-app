@@ -10,5 +10,13 @@
     <string name="QuocGia">Quốc gia</string>
     <string name="DoAnChay">Đồ ăn chay</string>
     <string name="Loc">Lọc</string>
+    <string name="btn_login">Đăng nhập</string>
+    <string name="txt_username">Tên đăng nhập</string>
+    <string name="txt_password">Mật khẩu</string>
+    <string name="txt_sign_up">Chưa có tài khoản? Đăng ký ngay</string>
+    <string name="txt_login">Bạn đã có tài khoản? Trở lại màn hình đăng nhập</string>
+    <string name="btn_sign_up">Đăng ký</string>
+    <string name="txt_password_confirm">Xác nhận mật khẩu</string>
+    <string name="txt_full_name">Họ và tên</string>
 </resources>
 
