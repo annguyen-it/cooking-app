@@ -103,7 +103,7 @@ public class SignUpActivity extends AppCompatActivity {
             final SignUpDto signUpDto = new SignUpDto(fullName, username, finalPassword);
             final SignUpActivity thisActivity = this;
 
-            new HttpService<>(this).http(AccountService.class)
+            new HttpService<>(this).instance(AccountService.class)
                 .signUp(signUpDto)
                 .enqueue(new Callback<SignUpModel>() {
                     @Override
