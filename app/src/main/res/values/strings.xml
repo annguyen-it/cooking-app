@@ -18,5 +18,30 @@
     <string name="btn_sign_up">Đăng ký</string>
     <string name="txt_password_confirm">Xác nhận mật khẩu</string>
     <string name="txt_full_name">Họ và tên</string>
+    <string name="title_activity_add_food">AddFood</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s
+    </string>
+    <string name="txt_food_name">Tên món</string>
+    <string name="txt_food_description">Mô tả</string>
+    <string name="txt_is_vegetarian">Là đồ ăn chay</string>
+    <string name="txt_food_difficult_level">Độ khó</string>
+    <string name="txt_food_time_to_cook">Thời gian nấu (phút)</string>
+    <string name="txt_food_ingredient">Thành phần</string>
+    <string name="txt_food_tips">Mẹo</string>
+    <string name="btn_food_upload_image">Tải lên ảnh món ăn</string>
+    <string name="spn_food_country">Quốc gia</string>
+    <string name="rtb_food_difficult_level">Độ khó</string>
+    <string name="txt_food_steps">Các bước thực hiện</string>
+    <string name="btn_add_step">Thêm bước</string>
+    <string name="txt_step_name">Tên bước</string>
+    <string name="txt_step_description">Mô tả</string>
+    <string name="btn_step_add_image">Thêm ảnh</string>
 </resources>
 

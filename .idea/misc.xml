@@ -8,15 +8,21 @@
         <entry key="..\:/Users/An Nguyen/Documents/Study/S6/mobile/CookingApp/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.15" />
         <entry key="..\:/Users/An Nguyen/Documents/Study/S6/mobile/CookingApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2717948717948718" />
         <entry key="..\:/Users/An Nguyen/Documents/Study/S6/mobile/CookingApp/app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.15" />
+        <entry key="..\:/Users/An Nguyen/Documents/Study/S6/mobile/CookingApp/app/src/main/res/layout/activity_add_food.xml" value="0.1" />
         <entry key="..\:/Users/An Nguyen/Documents/Study/S6/mobile/CookingApp/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Users/An Nguyen/Documents/Study/S6/mobile/CookingApp/app/src/main/res/layout/activity_main.xml" value="0.19610507246376813" />
         <entry key="..\:/Users/An Nguyen/Documents/Study/S6/mobile/CookingApp/app/src/main/res/layout/activity_sign_up.xml" value="0.16770833333333332" />
+        <entry key="..\:/Users/An Nguyen/Documents/Study/S6/mobile/CookingApp/app/src/main/res/layout/content_add_food.xml" value="0.24094202898550723" />
         <entry key="..\:/Users/An Nguyen/Documents/Study/S6/mobile/CookingApp/app/src/main/res/layout/fragment_dashboard.xml" value="0.13385416666666666" />
         <entry key="..\:/Users/An Nguyen/Documents/Study/S6/mobile/CookingApp/app/src/main/res/layout/fragment_discover.xml" value="0.134375" />
+        <entry key="..\:/Users/An Nguyen/Documents/Study/S6/mobile/CookingApp/app/src/main/res/layout/fragment_first.xml" value="0.24094202898550723" />
         <entry key="..\:/Users/An Nguyen/Documents/Study/S6/mobile/CookingApp/app/src/main/res/layout/fragment_home.xml" value="0.13385416666666666" />
         <entry key="..\:/Users/An Nguyen/Documents/Study/S6/mobile/CookingApp/app/src/main/res/layout/fragment_notifications.xml" value="0.13385416666666666" />
         <entry key="..\:/Users/An Nguyen/Documents/Study/S6/mobile/CookingApp/app/src/main/res/layout/fragment_profile.xml" value="0.264" />
+        <entry key="..\:/Users/An Nguyen/Documents/Study/S6/mobile/CookingApp/app/src/main/res/layout/fragment_second.xml" value="0.24094202898550723" />
+        <entry key="..\:/Users/An Nguyen/Documents/Study/S6/mobile/CookingApp/app/src/main/res/layout/item_add_step.xml" value="0.264" />
         <entry key="..\:/Users/An Nguyen/Documents/Study/S6/mobile/CookingApp/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1" />
+        <entry key="..\:/Users/An Nguyen/Documents/Study/S6/mobile/CookingApp/app/src/main/res/menu/menu.xml" value="0.2558974358974359" />
       </map>
     </option>
   </component>

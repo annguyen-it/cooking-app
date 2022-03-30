@@ -83,7 +83,7 @@ public class LoginActivity extends AppCompatActivity {
                 DataHelper.getPreferences(thisActivity).edit()
                     .putString(PreferencesConstant.ACCESS_TOKEN, loginModel != null ? loginModel.accessToken : "")
                     .apply();
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                startActivity(new Intent(thisActivity, MainActivity.class));
             }
 
             @Override
@@ -122,7 +122,7 @@ public class LoginActivity extends AppCompatActivity {
                             .putString(PreferencesConstant.ACCESS_TOKEN,
                                 loginModel != null ? loginModel.accessToken : "")
                             .apply();
-                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                        startActivity(new Intent(thisActivity, MainActivity.class));
                         return;
                     }
 
@@ -145,7 +145,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void addEventToSignUpText() {
-        txtSignUp.setOnClickListener(view -> startActivity(new Intent(LoginActivity.this, SignUpActivity.class)));
+        txtSignUp.setOnClickListener(view -> startActivity(new Intent(this, SignUpActivity.class)));
     }
 
     private void showToast(String text) {
