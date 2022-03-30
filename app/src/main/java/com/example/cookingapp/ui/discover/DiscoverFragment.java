@@ -1,8 +1,6 @@
 package com.example.cookingapp.ui.discover;
 
-import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,23 +11,29 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ArrayAdapter;
 import android.widget.SearchView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
+import com.example.cookingapp.MainActivity;
 import com.example.cookingapp.R;
 import com.example.cookingapp.databinding.FragmentDiscoverBinding;
 
-public class DiscoverFragment extends Fragment{
+public class DiscoverFragment extends Fragment {
     String[] name = {"A", "AB", "BC"};
     ArrayAdapter<String> arrayAdapter;
     private FragmentDiscoverBinding binding;
 
     boolean isHide;
-    private ConstraintLayout layout;
+    private static ConstraintLayout layout;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -48,6 +52,14 @@ public class DiscoverFragment extends Fragment{
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+            @Override
+            public void handleOnBackPressed() {
+                hideMenuSearch(layout);
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
     }
 
     @Override
@@ -69,13 +81,7 @@ public class DiscoverFragment extends Fragment{
             activity.getMenuInflater().inflate(R.menu.menu, menu);
             MenuItem menuItem = menu.findItem(R.id.action_search);
 
-            menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-                @Override
-                public boolean onMenuItemClick(MenuItem menuItem) {
-                    showMenuSearch(layout);
-                    return false;
-                }
-            });
+
             SearchView searchView = (SearchView) menuItem.getActionView();
             searchView.setQueryHint("Nhập từ khóa");
             searchView.setFocusable(true);
@@ -107,6 +113,7 @@ public class DiscoverFragment extends Fragment{
 
         super.onCreateOptionsMenu(menu, inflater);
     }
+
 
     public void showMenuSearch(View view){
         view.setVisibility(View.VISIBLE);

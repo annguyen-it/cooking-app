@@ -1,14 +1,19 @@
 package com.example.cookingapp;
 
+import android.app.Fragment;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.cookingapp.databinding.ActivityMainBinding;
+import com.example.cookingapp.ui.discover.DiscoverFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,4 +36,6 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
     }
+
+
 }

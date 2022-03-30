@@ -131,7 +131,7 @@ public class LoginActivity extends AppCompatActivity {
                         showToast("Mật khẩu không chính xác");
                     }
                     else {
-                        showToast("Lỗi hệ thống, vui lòng thử lại sau");
+                        showToast("Lỗi hệ thống, vui lòng thử lại sau 1");
                     }
                 }
 
