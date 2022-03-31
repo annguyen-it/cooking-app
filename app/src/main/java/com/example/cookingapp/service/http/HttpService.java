@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 
 import com.example.cookingapp.util.constant.PreferencesConstant;
 import com.example.cookingapp.util.setting.AppSetting;
@@ -12,7 +13,7 @@ import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class HttpService<A extends AppCompatActivity> {
+public class HttpService<A extends FragmentActivity> {
     private final A activity;
 
     public HttpService(A activity) {

@@ -10,7 +10,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.example.cookingapp.R;
-import com.example.cookingapp.data.model.FoodModel;
+import com.example.cookingapp.data.dto.FoodDto;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ public class FoodAdapter extends BaseAdapter {
 
     private Context context;
     private int layout;
-    private List<FoodModel> lstFood;
+    private List<FoodDto> lstFood;
 
     public Context getContext() {
         return context;
@@ -36,11 +36,11 @@ public class FoodAdapter extends BaseAdapter {
         this.layout = layout;
     }
 
-    public List<FoodModel> getLstFood() {
+    public List<FoodDto> getLstFood() {
         return lstFood;
     }
 
-    public void setLstFood(List<FoodModel> lstFood) {
+    public void setLstFood(List<FoodDto> lstFood) {
         this.lstFood = lstFood;
     }
 
@@ -71,11 +71,8 @@ public class FoodAdapter extends BaseAdapter {
         TextView txtNameOwner = view.findViewById(R.id.txtNameOwner);
         RatingBar ratingBar = view.findViewById(R.id.ratingBar);
 
-        FoodModel food = lstFood.get(i);
-        imgFood.setImageResource(food.getIdImage());
-        txtNameFood.setText(food.getName());
-        txtNameOwner.setText(food.getUserName());
-        ratingBar.setRating(food.getRate());
+        FoodDto food = lstFood.get(i);
+
 
         return view;
     }
