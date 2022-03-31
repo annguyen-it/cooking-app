@@ -1,18 +1,20 @@
 package com.example.cookingapp.data.dto;
 
+import android.net.Uri;
+
 public class Step {
     private String name;
     private String description;
-    private String imagePath;
+    private Uri imageUri;
 
     public Step() {
-        this("", "", "");
+        this("", "", null);
     }
 
-    private Step(String name, String description, String imagePath) {
+    private Step(String name, String description, Uri imageUri) {
         this.name = name;
         this.description = description;
-        this.imagePath = imagePath;
+        this.imageUri = imageUri;
     }
 
     public String getName() {
@@ -23,8 +25,8 @@ public class Step {
         return description;
     }
 
-    public String getImagePath() {
-        return imagePath;
+    public Uri getImageUri() {
+        return imageUri;
     }
 
     public void setName(String name) {
@@ -35,7 +37,7 @@ public class Step {
         this.description = description;
     }
 
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
+    public void setImageUri(Uri imageUri) {
+        this.imageUri = imageUri;
     }
 }
