@@ -11,18 +11,17 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.cookingapp.R;
-import com.example.cookingapp.ui.addFood.AddFood;
+import com.example.cookingapp.ui.addFood.AddFoodActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class ProfileFragment extends Fragment implements View.OnClickListener {
-    private FloatingActionButton btnAddFood;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
         // Binding components
-        btnAddFood = view.findViewById(R.id.btnAddFood);
+        FloatingActionButton btnAddFood = view.findViewById(R.id.btnAddFood);
         btnAddFood.setOnClickListener(this);
 
         return view;
@@ -41,7 +40,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.btnAddFood) {
-            startActivity(new Intent(getActivity(), AddFood.class));
+            startActivity(new Intent(getActivity(), AddFoodActivity.class));
         }
     }
 }

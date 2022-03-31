@@ -15,6 +15,13 @@ public class UiHelper {
         }
     }
 
+    public static <T extends AppCompatActivity> void displayActionBarNavigateBackButton(T activity) {
+        final ActionBar actionBar = activity.getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+    }
+
     public static void showToast(Context context, String text) {
         Toast.makeText(context, text, Toast.LENGTH_LONG).show();
     }

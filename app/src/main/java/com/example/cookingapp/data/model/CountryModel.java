@@ -1,25 +1,30 @@
 package com.example.cookingapp.data.model;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import androidx.annotation.NonNull;
 
-public class CountryModel {
-    @SerializedName("code")
-    @Expose
+import com.example.cookingapp.data.model.core.HasDefaultValue;
+
+public class CountryModel extends HasDefaultValue<CountryModel> {
     public final String code;
-
-
-    @SerializedName("name")
-    @Expose
     public final String name;
+
+    public CountryModel() {
+        this("", "");
+    }
 
     public CountryModel(String code, String name) {
         this.code = code;
         this.name = name;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return name;
+    }
+
+    @Override
+    public CountryModel defaultValue() {
+        return new CountryModel("", "Hãy chọn quốc gia");
     }
 }

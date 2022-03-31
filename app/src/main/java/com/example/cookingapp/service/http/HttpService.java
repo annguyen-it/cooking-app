@@ -20,7 +20,7 @@ public class HttpService<A extends FragmentActivity> {
         this.activity = activity;
     }
 
-    public <T> T http(Class<T> type) {
+    public <T> T instance(Class<T> type) {
         OkHttpClient client = new OkHttpClient
             .Builder()
             .addInterceptor(chain -> {

@@ -9,6 +9,5 @@ import retrofit2.http.GET;
 
 public interface CountryService {
     @GET("country")
-    Call<List<CountryModel>> getCountry();
-
+    Call<List<CountryModel>> getCountries();
 }

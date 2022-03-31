@@ -15,7 +15,7 @@
         android:theme="@style/Theme.CookingApp"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".ui.addFood.AddFood"
+            android:name=".ui.addFood.AddFoodActivity"
             android:exported="false"
             android:label="@string/title_activity_add_food"
             android:theme="@style/Theme.CookingApp.NoActionBar" />

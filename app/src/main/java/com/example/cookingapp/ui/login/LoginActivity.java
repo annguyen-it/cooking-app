@@ -65,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void login(String username, String password, Callback<LoginModel> callback) {
-        new HttpService<>(this).http(AccountService.class)
+        new HttpService<>(this).instance(AccountService.class)
             .login(new LoginDto(username, password))
             .enqueue(callback);
     }
