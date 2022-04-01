@@ -1,9 +1,11 @@
 package com.example.cookingapp.util.helper;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
+import androidx.annotation.IdRes;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -32,5 +34,9 @@ public class UiHelper {
                 .hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
         }
         catch (Exception ignored) { }
+    }
+
+    public static Uri getUri(@IdRes int id) {
+        return Uri.parse("android..resource://com.example.cookingapp" + id);
     }
 }

@@ -45,5 +45,6 @@
     <string name="btn_step_add_image">Thêm ảnh</string>
     <string name="img_food">Ảnh món ăn</string>
     <string name="txt_step">Bước %1$d</string>
+    <string name="btn_finish_add">Tạo món ăn</string>
 </resources>
 

@@ -64,6 +64,12 @@ public class AddStepAdapter extends RecyclerView.Adapter<AddStepAdapter.ViewHold
         return steps.size();
     }
 
+    public void addNewStep() {
+        final int itemsCount = getItemCount();
+        steps.add(new StepUiModel());
+        notifyItemInserted(itemsCount);
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public final TextView txtStepNumber;
         public final EditText txtStepName;
