@@ -3,6 +3,7 @@ package com.example.cookingapp;
 import android.os.Bundle;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -41,9 +42,10 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_dashboard)
-                .build();
-        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_activity_main);
+            R.id.navigation_home, R.id.navigation_dashboard)
+            .build();
+        NavHostFragment navHostFragment =
+            (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_activity_main);
         assert navHostFragment != null;
         NavController navController = navHostFragment.getNavController();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
@@ -55,27 +57,28 @@ public class MainActivity extends AppCompatActivity {
         getCountry();
     }
 
-    public void getCountry(){
+    public void getCountry() {
         Callback<List<CountryModel>> callback = new Callback<List<CountryModel>>() {
             @Override
-            public void onResponse(Call<List<CountryModel>> call, Response<List<CountryModel>> response) {
+            public void onResponse(@NonNull Call<List<CountryModel>> call, Response<List<CountryModel>> response) {
                 countryList = response.body();
                 getModelCountry(countryList);
             }
 
             @Override
-            public void onFailure(Call<List<CountryModel>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<CountryModel>> call, @NonNull Throwable ts) {
 
             }
         };
-        new HttpService<>(this).http(CountryService.class)
-                .getCountry()
-                .enqueue(callback);
+        new HttpService<>(this).instance(CountryService.class)
+            .getCountries()
+            .enqueue(callback);
 
 
 //        Log.e("1235",discoverViewModel.getCountry().+"");
     }
-    private void getModelCountry(List<CountryModel> countryList){
+
+    private void getModelCountry(List<CountryModel> countryList) {
         discoverViewModel.setCountry(countryList);
     }
 }

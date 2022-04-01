@@ -13,17 +13,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cookingapp.R;
-import com.example.cookingapp.data.dto.Step;
+import com.example.cookingapp.data.ui.StepUiModel;
 import com.example.cookingapp.ui.addFood.AddFoodActivity;
 
 import java.util.List;
 
 public class AddStepAdapter extends RecyclerView.Adapter<AddStepAdapter.ViewHolder> {
-    private final List<Step> steps;
+    private final List<StepUiModel> steps;
     private final AddFoodActivity activity;
     private Context context;
 
-    public AddStepAdapter(AddFoodActivity activity, List<Step> steps) {
+    public AddStepAdapter(AddFoodActivity activity, List<StepUiModel> steps) {
         this.steps = steps;
         this.activity = activity;
     }

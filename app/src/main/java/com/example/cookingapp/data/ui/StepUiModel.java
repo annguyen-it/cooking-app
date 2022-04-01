@@ -1,17 +1,17 @@
-package com.example.cookingapp.data.dto;
+package com.example.cookingapp.data.ui;
 
 import android.net.Uri;
 
-public class Step {
+public class StepUiModel {
     private String name;
     private String description;
     private Uri imageUri;
 
-    public Step() {
+    public StepUiModel() {
         this("", "", null);
     }
 
-    private Step(String name, String description, Uri imageUri) {
+    private StepUiModel(String name, String description, Uri imageUri) {
         this.name = name;
         this.description = description;
         this.imageUri = imageUri;

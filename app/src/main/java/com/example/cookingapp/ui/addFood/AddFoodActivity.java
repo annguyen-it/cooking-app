@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cookingapp.R;
-import com.example.cookingapp.data.dto.Step;
+import com.example.cookingapp.data.ui.StepUiModel;
 import com.example.cookingapp.data.model.CountryModel;
 import com.example.cookingapp.databinding.ActivityAddFoodBinding;
 import com.example.cookingapp.service.http.CountryService;
@@ -38,7 +38,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class AddFoodActivity extends AppCompatActivity {
-    private final ArrayList<Step> steps = new ArrayList<>();
+    private final ArrayList<StepUiModel> steps = new ArrayList<>();
     private final AddStepAdapter addStepAdapter = new AddStepAdapter(this, steps);
 
     private Button btnAddStep;
@@ -99,7 +99,7 @@ public class AddFoodActivity extends AppCompatActivity {
     private void addEventToAddStepButton() {
         btnAddStep.setOnClickListener(view -> {
             final int itemsCount = addStepAdapter.getItemCount();
-            steps.add(new Step());
+            steps.add(new StepUiModel());
             addStepAdapter.notifyItemInserted(itemsCount);
             rvSteps.smoothScrollToPosition(itemsCount);
         });

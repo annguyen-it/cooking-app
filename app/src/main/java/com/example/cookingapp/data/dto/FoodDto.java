@@ -1,6 +1,7 @@
 package com.example.cookingapp.data.dto;
 
 import com.example.cookingapp.data.model.CountryModel;
+import com.example.cookingapp.data.ui.StepUiModel;
 
 import java.util.Date;
 import java.util.List;
@@ -20,7 +21,7 @@ public class FoodDto {
     private String tips;
     private float rate;
     private int voteCount;
-    private List<Step> steps;
+    private List<StepUiModel> steps;
 
     public FoodDto(int id) {
         this.id = id;
@@ -137,11 +138,11 @@ public class FoodDto {
         this.voteCount = voteCount;
     }
 
-    public List<Step> getSteps() {
+    public List<StepUiModel> getSteps() {
         return steps;
     }
 
-    public void setSteps(List<Step> steps) {
+    public void setSteps(List<StepUiModel> steps) {
         this.steps = steps;
     }
 }
