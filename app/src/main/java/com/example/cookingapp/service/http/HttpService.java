@@ -3,7 +3,6 @@ package com.example.cookingapp.service.http;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentActivity;
 
 import com.example.cookingapp.util.constant.PreferencesConstant;

@@ -66,12 +66,14 @@ public class FoodAdapter extends BaseAdapter {
 
         view = inflater.inflate(layout,null);
 
-        ImageView imgFood = (ImageView) view.findViewById(R.id.imgFood);
+        ImageView imageView = (ImageView) view.findViewById(R.id.imgFood);
         TextView txtNameFood = view.findViewById(R.id.txtNameFood);
         TextView txtNameOwner = view.findViewById(R.id.txtNameOwner);
         RatingBar ratingBar = view.findViewById(R.id.ratingBar);
 
         FoodDto food = lstFood.get(i);
+       // imageView = food.getIdImage();
+
 
 
         return view;

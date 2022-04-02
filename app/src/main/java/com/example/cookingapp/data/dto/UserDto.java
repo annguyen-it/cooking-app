@@ -1,11 +1,13 @@
 package com.example.cookingapp.data.dto;
 
+import android.net.Uri;
+
 public class UserDto {
 
     private int id;
     private String userName;
     private String fullName;
-    private int imgAvatar;
+    private Uri imgAvatar;
 
     public UserDto(){}
 
@@ -33,11 +35,11 @@ public class UserDto {
         this.fullName = fullName;
     }
 
-    public int getImgAvatar() {
+    public Uri getImgAvatar() {
         return imgAvatar;
     }
 
-    public void setImgAvatar(int imgAvatar) {
+    public void setImgAvatar(Uri imgAvatar) {
         this.imgAvatar = imgAvatar;
     }
 

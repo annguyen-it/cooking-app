@@ -3,6 +3,7 @@ package com.example.cookingapp.ui.login;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -13,14 +14,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.cookingapp.MainActivity;
 import com.example.cookingapp.R;
 import com.example.cookingapp.data.dto.LoginDto;
+import com.example.cookingapp.data.dto.UserDto;
+import com.example.cookingapp.data.model.CountryModel;
 import com.example.cookingapp.data.model.LoginModel;
+import com.example.cookingapp.data.model.UserModel;
 import com.example.cookingapp.databinding.ActivityLoginBinding;
 import com.example.cookingapp.service.http.AccountService;
+import com.example.cookingapp.service.http.CountryService;
 import com.example.cookingapp.service.http.HttpService;
 import com.example.cookingapp.ui.signUp.SignUpActivity;
 import com.example.cookingapp.util.constant.PreferencesConstant;
 import com.example.cookingapp.util.helper.DataHelper;
 import com.example.cookingapp.util.helper.UiHelper;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,10 +38,14 @@ public class LoginActivity extends AppCompatActivity {
     private TextView txtPassword;
     private Button btnLogin;
     private TextView txtSignUp;
+    private Intent intent;
+    private UserModel userModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        intent = new Intent(this, MainActivity.class);
 
         // Hide action bar
         UiHelper.hideActionBar(this);
@@ -71,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void autoLogin(String username, String password) {
-        startActivity(new Intent(this, MainActivity.class));
+//        startActivity(intent);
         final LoginActivity thisActivity = this;
 
         login(username, password, new Callback<LoginModel>() {
@@ -83,7 +94,8 @@ public class LoginActivity extends AppCompatActivity {
                 DataHelper.getPreferences(thisActivity).edit()
                     .putString(PreferencesConstant.ACCESS_TOKEN, loginModel != null ? loginModel.accessToken : "")
                     .apply();
-                startActivity(new Intent(thisActivity, MainActivity.class));
+                //startActivity(intent);
+                setStartIntent();
             }
 
             @Override
@@ -122,7 +134,8 @@ public class LoginActivity extends AppCompatActivity {
                             .putString(PreferencesConstant.ACCESS_TOKEN,
                                 loginModel != null ? loginModel.accessToken : "")
                             .apply();
-                        startActivity(new Intent(thisActivity, MainActivity.class));
+                        //startActivity(intent);
+                        setStartIntent();
                         return;
                     }
 
@@ -150,5 +163,32 @@ public class LoginActivity extends AppCompatActivity {
 
     private void showToast(String text) {
         UiHelper.showToast(LoginActivity.this, text);
+    }
+
+    private void setStartIntent(){
+        Intent intent = this.intent;
+
+        Callback<UserModel> callback = new Callback<UserModel>() {
+            @Override
+            public void onResponse(Call<UserModel> call, Response<UserModel> response) {
+                userModel = response.body();
+//                Log.e("123",userModel.getUsername());
+//                Bundle bundle = new Bundle();
+//                bundle.putString(PreferencesConstant.USERNAME,userModel.getUsername());
+//                bundle.putString(PreferencesConstant.FULL_NAME,userModel.getFullName());
+//                bundle.putInt(PreferencesConstant.ID_IMAGE,userModel.getIdImage());
+//                intent.putExtras(bundle);
+
+                startActivity(intent);
+            }
+
+            @Override
+            public void onFailure(Call<UserModel> call, Throwable t) {
+
+            }
+        };
+        new HttpService<>(this).instance(AccountService.class)
+                .getInfo()
+                .enqueue(callback);
     }
 }

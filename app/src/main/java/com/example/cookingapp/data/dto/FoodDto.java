@@ -1,5 +1,7 @@
 package com.example.cookingapp.data.dto;
 
+import android.net.Uri;
+
 import com.example.cookingapp.data.model.CountryModel;
 import com.example.cookingapp.data.ui.StepUiModel;
 
@@ -10,7 +12,7 @@ public class FoodDto {
     private int id;
     private UserDto owner;
     private String name;
-    private int idImage;
+    private Uri idImage;
     private String description;
     private boolean isVegetarian;
     private int difficultLevel;
@@ -50,11 +52,11 @@ public class FoodDto {
         this.name = name;
     }
 
-    public int getIdImage() {
+    public Uri getIdImage() {
         return idImage;
     }
 
-    public void setIdImage(int idImage) {
+    public void setIdImage(Uri idImage) {
         this.idImage = idImage;
     }
 

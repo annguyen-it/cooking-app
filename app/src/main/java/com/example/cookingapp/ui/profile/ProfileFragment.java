@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,6 +16,8 @@ import com.example.cookingapp.ui.addFood.AddFoodActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class ProfileFragment extends Fragment implements View.OnClickListener {
+
+    ImageView imgAvatar;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -30,6 +33,13 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        binding(view);
+
+    }
+
+    private void binding(View view){
+        imgAvatar = view.findViewById(R.id.imgAvatar);
     }
 
     @Override
@@ -39,8 +49,14 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.btnAddFood) {
-            startActivity(new Intent(getActivity(), AddFoodActivity.class));
+
+        switch (view.getId()){
+            case R.id.btnAddFood:
+                startActivity(new Intent(getActivity(), AddFoodActivity.class));
+                break;
+            case R.id.imgAvatar:
+
+                break;
         }
     }
 }
