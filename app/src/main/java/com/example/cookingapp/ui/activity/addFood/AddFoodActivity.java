@@ -1,4 +1,4 @@
-package com.example.cookingapp.ui.addFood;
+package com.example.cookingapp.ui.activity.addFood;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -26,13 +26,17 @@ import com.example.cookingapp.service.http.HttpService;
 import com.example.cookingapp.ui.adapter.AddStepAdapter;
 import com.example.cookingapp.ui.adapter.SpinnerAdapter;
 import com.example.cookingapp.util.constant.AppConstant;
+import com.example.cookingapp.util.constant.HttpConstant;
 import com.example.cookingapp.util.helper.UiHelper;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import kotlin.Unit;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -42,6 +46,7 @@ public class AddFoodActivity extends AppCompatActivity {
     private final AddStepAdapter addStepAdapter = new AddStepAdapter(this, steps);
 
     private Button btnAddStep;
+    private Button btnAddFinish;
     private Button btnUploadImage;
     private Spinner spnCountry;
     private ImageView imgFood;
@@ -55,7 +60,6 @@ public class AddFoodActivity extends AppCompatActivity {
             final int resultCode = result.getResultCode();
             if (resultCode == Activity.RESULT_OK) {
                 final Intent data = result.getData();
-                System.out.println(data);
                 if (data != null) {
                     imageButtonHolder.setVisibility(View.GONE);
                     imageHolder.setVisibility(View.VISIBLE);
@@ -78,12 +82,14 @@ public class AddFoodActivity extends AppCompatActivity {
 
         // Binding components
         btnAddStep = findViewById(R.id.btnAddStep);
+        btnAddFinish = findViewById(R.id.btnAddFinish);
         btnUploadImage = findViewById(R.id.btnUploadImage);
         spnCountry = findViewById(R.id.spnCountry);
         imgFood = findViewById(R.id.imgUploadFood);
         rvSteps = findViewById(R.id.layout_step_list);
 
         // Add events
+        addEventToAddFinishButton();
         addEventToAddStepButton();
         addEventToUploadImageComponents();
 
@@ -96,12 +102,60 @@ public class AddFoodActivity extends AppCompatActivity {
         getCountriesData();
     }
 
+    public void uploadImage(Button imageButtonHolder, ImageView imageHolder) {
+        this.imageButtonHolder = imageButtonHolder;
+        this.imageHolder = imageHolder;
+
+        ImagePicker.with(this)
+            .cropSquare()
+            .compress(AppConstant.MAX_IMAGE_FILE_SIZE)
+            .createIntent(intent -> {
+                getImage.launch(intent);
+                return Unit.INSTANCE;
+            });
+    }
+
+    private void addEventToAddFinishButton() {
+        btnAddFinish.setOnClickListener(view -> {
+            final int stepsCount = addStepAdapter.getItemCount();
+
+            // Main image
+            final File mainImageFile = new File(UiHelper.getUri(imgFood.getId()).getPath());
+            final RequestBody mainImage = RequestBody.create(HttpConstant.IMAGE, mainImageFile);
+            final MultipartBody.Part mainImagePart =
+                MultipartBody.Part.createFormData("mainImage", mainImageFile.getName(), mainImage);
+
+            final MultipartBody.Part[] stepImageParts = new MultipartBody.Part[stepsCount];
+
+            for (int i = 0; i < stepsCount; i++) {
+                final AddStepAdapter.ViewHolder stepView =
+                    (AddStepAdapter.ViewHolder) rvSteps.findViewHolderForAdapterPosition(i);
+                if (stepView == null) {
+                    continue;
+                }
+
+                final File file = new File(UiHelper.getUri(stepView.imgStep.getId()).getPath());
+                final RequestBody stepBody = RequestBody.create(HttpConstant.IMAGE, file.getName());
+                stepImageParts[i] = MultipartBody.Part.createFormData("stepImage", file.getName(), stepBody);
+            }
+
+            System.out.println(addStepAdapter.getSteps());
+            //            new HttpService<>(this).instance(FoodService.class)
+//                .addNewFood(mainImagePart, stepImageParts, null)
+//                .enqueue(new Callback<LoginModel>() {
+//                    @Override
+//                    public void onResponse(@NonNull Call<LoginModel> call, @NonNull Response<LoginModel> response) {}
+//
+//                    @Override
+//                    public void onFailure(@NonNull Call<LoginModel> call, @NonNull Throwable t) { }
+//                });
+        });
+    }
+
     private void addEventToAddStepButton() {
         btnAddStep.setOnClickListener(view -> {
-            final int itemsCount = addStepAdapter.getItemCount();
-            steps.add(new StepUiModel());
-            addStepAdapter.notifyItemInserted(itemsCount);
-            rvSteps.smoothScrollToPosition(itemsCount);
+            addStepAdapter.addNewStep();
+            rvSteps.smoothScrollToPosition(addStepAdapter.getItemCount() - 1);
         });
     }
 
@@ -135,19 +189,5 @@ public class AddFoodActivity extends AppCompatActivity {
 
     private void uploadImage() {
         uploadImage(this.btnUploadImage, this.imgFood);
-    }
-
-    public void uploadImage(Button imageButtonHolder, ImageView imageHolder) {
-        this.imageButtonHolder = imageButtonHolder;
-        this.imageHolder = imageHolder;
-        System.out.println("Id: " + imageButtonHolder.getId());
-
-        ImagePicker.with(this)
-            .cropSquare()
-            .compress(AppConstant.MAX_IMAGE_FILE_SIZE)
-            .createIntent(intent -> {
-                getImage.launch(intent);
-                return Unit.INSTANCE;
-            });
     }
 }

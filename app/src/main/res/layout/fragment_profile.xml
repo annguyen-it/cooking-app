@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#ffffff"
     android:padding="24dp"
-    tools:context=".ui.profile.ProfileFragment">
+    tools:context=".ui.fragment.profile.ProfileFragment">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnAddFood"
@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="32dp"
-        android:text="TextView"
+        android:text=""
         android:textSize="24sp"
         app:layout_constraintStart_toEndOf="@+id/cardAvatar"
         app:layout_constraintTop_toTopOf="parent" />

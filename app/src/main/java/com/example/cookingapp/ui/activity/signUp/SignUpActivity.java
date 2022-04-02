@@ -1,6 +1,5 @@
-package com.example.cookingapp.ui.signUp;
+package com.example.cookingapp.ui.activity.signUp;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
@@ -37,9 +36,6 @@ public class SignUpActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // Hide action bar
-        UiHelper.hideActionBar(this);
 
         // Set content view
         final ActivitySignUpBinding binding = ActivitySignUpBinding.inflate(getLayoutInflater());
@@ -114,10 +110,6 @@ public class SignUpActivity extends AppCompatActivity {
                                 .putString(PreferencesConstant.PASSWORD, finalPassword)
                                 .apply();
 
-
-                            final SharedPreferences pref = DataHelper.getPreferences(thisActivity);
-                            final String savedUsername = pref.getString(PreferencesConstant.USERNAME, "");
-
                             showToast("Tạo tài khoản thành công");
                             finish();
                             return;
@@ -126,10 +118,10 @@ public class SignUpActivity extends AppCompatActivity {
                         btnSignUp.setEnabled(true);
                         if (response.code() == 409) {
                             showToast("Tên đăng nhập đã được sử dụng, vui lòng chọn tên khác");
+                            return;
                         }
-                        else {
-                            showToast("Lỗi hệ thống, vui lòng thử lại sau");
-                        }
+
+                        showToast("Lỗi hệ thống, vui lòng thử lại sau");
                     }
 
                     @Override

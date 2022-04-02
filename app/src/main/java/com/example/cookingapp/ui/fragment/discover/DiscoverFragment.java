@@ -1,4 +1,4 @@
-package com.example.cookingapp.ui.discover;
+package com.example.cookingapp.ui.fragment.discover;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,7 +8,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.TranslateAnimation;
-import android.widget.ArrayAdapter;
 import android.widget.SearchView;
 import android.widget.Spinner;
 
@@ -53,7 +52,7 @@ public class DiscoverFragment extends Fragment {
         discoverViewModel = new ViewModelProvider(requireActivity()).get(DiscoverViewModel.class);
         discoverViewModel.getCountry().observe(getViewLifecycleOwner(), countryModels -> {
             countryModels.add(0,new CountryModel().defaultValue());
-            adapterCountry = new SpinnerAdapter<>(getActivity(), countryModels);
+            adapterCountry = new SpinnerAdapter<>(requireActivity(), countryModels);
 
             cboNuoc.setAdapter(adapterCountry);
         });

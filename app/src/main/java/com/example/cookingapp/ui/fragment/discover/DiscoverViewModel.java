@@ -1,4 +1,4 @@
-package com.example.cookingapp.ui.discover;
+package com.example.cookingapp.ui.fragment.discover;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -15,7 +15,6 @@ public class DiscoverViewModel extends ViewModel {
 
     public DiscoverViewModel() {
         country = new MutableLiveData<>();
-
     }
 
     public LiveData<List<CountryModel>> getCountry(){
@@ -25,5 +24,4 @@ public class DiscoverViewModel extends ViewModel {
     public void setCountry(List<CountryModel> lstCountry){
         country.setValue(lstCountry);
     }
-
 }

@@ -1,6 +1,8 @@
 package com.example.cookingapp.ui.adapter;
 
 import android.content.Context;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cookingapp.R;
 import com.example.cookingapp.data.ui.StepUiModel;
-import com.example.cookingapp.ui.addFood.AddFoodActivity;
+import com.example.cookingapp.ui.activity.addFood.AddFoodActivity;
 
 import java.util.List;
 
@@ -22,6 +24,10 @@ public class AddStepAdapter extends RecyclerView.Adapter<AddStepAdapter.ViewHold
     private final List<StepUiModel> steps;
     private final AddFoodActivity activity;
     private Context context;
+
+    public List<StepUiModel> getSteps() {
+        return steps;
+    }
 
     public AddStepAdapter(AddFoodActivity activity, List<StepUiModel> steps) {
         this.steps = steps;
@@ -44,6 +50,8 @@ public class AddStepAdapter extends RecyclerView.Adapter<AddStepAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final TextView txtStepNumber = holder.txtStepNumber;
+        final TextView txtStepName = holder.txtStepName;
+        final TextView txtStepDescription = holder.txtStepDescription;
         final Button btnStepAddImage = holder.btnStepAddImage;
         final ImageView imgStep = holder.imgStep;
         final Button btnStepRemove = holder.btnStepRemove;
@@ -51,9 +59,34 @@ public class AddStepAdapter extends RecyclerView.Adapter<AddStepAdapter.ViewHold
         txtStepNumber.setText(context.getString(R.string.txt_step, position + 1));
         btnStepAddImage.setOnClickListener(view -> activity.uploadImage(btnStepAddImage, imgStep));
         btnStepRemove.setOnClickListener(view -> {
-            steps.remove(position);
-            notifyItemRemoved(position);
-            notifyItemRangeChanged(position, steps.size() - position);
+            final int currentPosition = holder.getAdapterPosition();
+            steps.remove(currentPosition);
+            notifyItemRemoved(currentPosition);
+            notifyItemRangeChanged(currentPosition, steps.size() - currentPosition);
+        });
+        txtStepName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                steps.get(holder.getAdapterPosition()).setName(charSequence.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) { }
+        });
+        txtStepDescription.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                steps.get(holder.getAdapterPosition()).setDescription(charSequence.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) { }
         });
         imgStep.setOnClickListener(view -> activity.uploadImage(btnStepAddImage, imgStep));
         imgStep.setVisibility(View.GONE);

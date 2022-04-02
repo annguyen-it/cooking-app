@@ -1,11 +1,9 @@
 package com.example.cookingapp.data.model;
 
-import android.net.Uri;
-
 public class UserModel {
-    private String username;
-    private String fullName;
-    private int idImage;
+    private final String username;
+    private final String fullName;
+    private final int idImage;
 
     public String getUsername() {
         return username;
@@ -19,12 +17,9 @@ public class UserModel {
         return idImage;
     }
 
-    public UserModel(String username, String fullname, int idImage) {
+    public UserModel(String username, String fullName, int idImage) {
         this.username = username;
-        this.fullName = fullname;
+        this.fullName = fullName;
         this.idImage = idImage;
     }
-
-
-
 }
