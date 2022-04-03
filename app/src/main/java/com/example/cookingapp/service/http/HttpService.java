@@ -1,7 +1,5 @@
 package com.example.cookingapp.service.http;
 
-import android.content.SharedPreferences;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.cookingapp.util.constant.PreferencesConstant;
@@ -37,8 +35,8 @@ public class HttpService<A extends AppCompatActivity> {
             .Builder()
             .addInterceptor(new OkHttpProfilerInterceptor())
             .addInterceptor(chain -> {
-                final SharedPreferences pref = DataHelper.getPreferences(activity);
-                final String accessToken = pref.getString(PreferencesConstant.ACCESS_TOKEN, "");
+                final String accessToken =
+                    DataHelper.getPrefString(PreferencesConstant.ACCESS_TOKEN, activity);
                 final Request original = chain.request();
 
                 if (accessToken.isEmpty()) {

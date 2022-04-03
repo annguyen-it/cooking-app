@@ -1,7 +1,6 @@
 package com.example.cookingapp.ui.activity.loading;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -22,7 +21,6 @@ import com.example.cookingapp.ui.activity.login.LoginActivity;
 import com.example.cookingapp.util.constant.BundleConstant;
 import com.example.cookingapp.util.constant.PreferencesConstant;
 import com.example.cookingapp.util.helper.DataHelper;
-import com.example.cookingapp.util.helper.UiHelper;
 import com.google.gson.Gson;
 
 import retrofit2.Call;
@@ -52,10 +50,8 @@ public class LoadingActivity extends AppCompatActivity {
         }
 
         // Auto login
-        final SharedPreferences pref = DataHelper.getPreferences(this);
-
-        final String savedUsername = pref.getString(PreferencesConstant.USERNAME, "");
-        final String savedPassword = pref.getString(PreferencesConstant.PASSWORD, "");
+        final String savedUsername = DataHelper.getPrefString(PreferencesConstant.USERNAME, this);
+        final String savedPassword = DataHelper.getPrefString(PreferencesConstant.PASSWORD, this);
         if (!savedUsername.isEmpty() && !savedPassword.isEmpty()) {
             autoLogin(savedUsername, savedPassword);
         }
@@ -120,8 +116,7 @@ public class LoadingActivity extends AppCompatActivity {
 
     private void saveAccessToken(Response<LoginModel> response) {
         final LoginModel loginModel = response.body();
-        DataHelper.getPreferences(this).edit()
-            .putString(PreferencesConstant.ACCESS_TOKEN, loginModel != null ? loginModel.accessToken : "")
-            .apply();
+        DataHelper.putPrefString(PreferencesConstant.ACCESS_TOKEN,
+            loginModel != null ? loginModel.accessToken : "", this);
     }
 }

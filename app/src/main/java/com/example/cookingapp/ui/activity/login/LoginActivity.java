@@ -72,12 +72,11 @@ public class LoginActivity extends AppCompatActivity {
                 public void onResponse(@NonNull Call<LoginModel> call, @NonNull Response<LoginModel> response) {
                     if (response.isSuccessful()) {
                         final LoginModel loginModel = response.body();
-                        DataHelper.getPreferences(thisActivity).edit()
-                            .putString(PreferencesConstant.USERNAME, username)
-                            .putString(PreferencesConstant.PASSWORD, password)
-                            .putString(PreferencesConstant.ACCESS_TOKEN,
-                                loginModel != null ? loginModel.accessToken : "")
-                            .apply();
+
+                        DataHelper.putPrefString(PreferencesConstant.USERNAME, username, thisActivity);
+                        DataHelper.putPrefString(PreferencesConstant.PASSWORD, password, thisActivity);
+                        DataHelper.putPrefString(PreferencesConstant.ACCESS_TOKEN,
+                            loginModel != null ? loginModel.accessToken : "", thisActivity);
 
                         redirectToLoading();
                         return;

@@ -105,10 +105,8 @@ public class SignUpActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(@NonNull Call<SignUpModel> call, @NonNull Response<SignUpModel> response) {
                         if (response.isSuccessful()) {
-                            DataHelper.getPreferences(thisActivity).edit()
-                                .putString(PreferencesConstant.USERNAME, username)
-                                .putString(PreferencesConstant.PASSWORD, finalPassword)
-                                .apply();
+                            DataHelper.putPrefString(PreferencesConstant.USERNAME, username, thisActivity);
+                            DataHelper.putPrefString(PreferencesConstant.PASSWORD, finalPassword, thisActivity);
 
                             showToast("Tạo tài khoản thành công");
                             finish();

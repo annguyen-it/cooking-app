@@ -10,13 +10,6 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class UiHelper {
-    public static <T extends AppCompatActivity> void hideActionBar(T activity) {
-        final ActionBar actionBar = activity.getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.hide();
-        }
-    }
-
     public static <T extends AppCompatActivity> void displayActionBarNavigateBackButton(T activity) {
         final ActionBar actionBar = activity.getSupportActionBar();
         if (actionBar != null) {
