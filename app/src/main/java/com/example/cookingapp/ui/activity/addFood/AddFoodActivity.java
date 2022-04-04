@@ -2,11 +2,15 @@ package com.example.cookingapp.ui.activity.addFood;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.RatingBar;
 import android.widget.Spinner;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -18,21 +22,26 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cookingapp.R;
-import com.example.cookingapp.data.ui.StepUiModel;
+import com.example.cookingapp.data.dto.AddNewFoodDto;
 import com.example.cookingapp.data.model.CountryModel;
+import com.example.cookingapp.data.model.LoginModel;
+import com.example.cookingapp.data.ui.StepUiModel;
 import com.example.cookingapp.databinding.ActivityAddFoodBinding;
-import com.example.cookingapp.service.http.CountryService;
+import com.example.cookingapp.service.http.FoodService;
 import com.example.cookingapp.service.http.HttpService;
 import com.example.cookingapp.ui.adapter.AddStepAdapter;
 import com.example.cookingapp.ui.adapter.SpinnerAdapter;
+import com.example.cookingapp.ui.core.view.AppImageView;
 import com.example.cookingapp.util.constant.AppConstant;
+import com.example.cookingapp.util.constant.BundleConstant;
 import com.example.cookingapp.util.constant.HttpConstant;
+import com.example.cookingapp.util.helper.ObjectHelper;
 import com.example.cookingapp.util.helper.UiHelper;
+import com.facebook.stetho.Stetho;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
 
 import kotlin.Unit;
 import okhttp3.MultipartBody;
@@ -45,15 +54,22 @@ public class AddFoodActivity extends AppCompatActivity {
     private final ArrayList<StepUiModel> steps = new ArrayList<>();
     private final AddStepAdapter addStepAdapter = new AddStepAdapter(this, steps);
 
+    private EditText txtFoodName;
+    private Spinner spnCountry;
+    private CheckBox cbIsVegetarian;
+    private RatingBar ratingBar;
+    private EditText txtTimeToCook;
+    private EditText txtDescription;
+    private EditText txtIngredient;
+    private EditText txtTips;
     private Button btnAddStep;
     private Button btnAddFinish;
     private Button btnUploadImage;
-    private Spinner spnCountry;
-    private ImageView imgFood;
+    private AppImageView imgFood;
     private RecyclerView rvSteps;
 
     private Button imageButtonHolder;
-    private ImageView imageHolder;
+    private AppImageView imageHolder;
 
     ActivityResultLauncher<Intent> getImage =
         registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
@@ -72,6 +88,7 @@ public class AddFoodActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Stetho.initializeWithDefaults(this);
 
         // Set content view
         final ActivityAddFoodBinding binding = ActivityAddFoodBinding.inflate(getLayoutInflater());
@@ -81,12 +98,7 @@ public class AddFoodActivity extends AppCompatActivity {
         UiHelper.displayActionBarNavigateBackButton(this);
 
         // Binding components
-        btnAddStep = findViewById(R.id.btnAddStep);
-        btnAddFinish = findViewById(R.id.btnAddFinish);
-        btnUploadImage = findViewById(R.id.btnUploadImage);
-        spnCountry = findViewById(R.id.spnCountry);
-        imgFood = findViewById(R.id.imgUploadFood);
-        rvSteps = findViewById(R.id.layout_step_list);
+        bindComponents();
 
         // Add events
         addEventToAddFinishButton();
@@ -99,10 +111,10 @@ public class AddFoodActivity extends AppCompatActivity {
         rvSteps.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
         // Load data
-        getCountriesData();
+        loadCountriesData();
     }
 
-    public void uploadImage(Button imageButtonHolder, ImageView imageHolder) {
+    public void changeImage(Button imageButtonHolder, AppImageView imageHolder) {
         this.imageButtonHolder = imageButtonHolder;
         this.imageHolder = imageHolder;
 
@@ -115,12 +127,45 @@ public class AddFoodActivity extends AppCompatActivity {
             });
     }
 
+    private void bindComponents() {
+        txtFoodName = findViewById(R.id.txtFoodName);
+        spnCountry = findViewById(R.id.spnCountry);
+        cbIsVegetarian = findViewById(R.id.cbIsVegetarian);
+        ratingBar = findViewById(R.id.ratingBar);
+        txtTimeToCook = findViewById(R.id.txtTimeToCook);
+        txtDescription = findViewById(R.id.txtDescription);
+        txtIngredient = findViewById(R.id.txtIngredient);
+        txtTips = findViewById(R.id.txtTips);
+        btnAddStep = findViewById(R.id.btnAddStep);
+        btnAddFinish = findViewById(R.id.btnAddFinish);
+        btnUploadImage = findViewById(R.id.btnUploadImage);
+        imgFood = findViewById(R.id.imgUploadFood);
+        rvSteps = findViewById(R.id.layout_step_list);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            ratingBar.setMin(1);
+        }
+    }
+
     private void addEventToAddFinishButton() {
         btnAddFinish.setOnClickListener(view -> {
+            final AddNewFoodDto addNewFoodDto;
+            try {
+                addNewFoodDto = generateDto();
+            }
+            catch (Exception e) {
+                return;
+            }
+
             final int stepsCount = addStepAdapter.getItemCount();
+            if (stepsCount == 0) {
+                showToast("Vui lòng nhập các bước thực hiện");
+                return;
+            }
 
             // Main image
-            final File mainImageFile = new File(UiHelper.getUri(imgFood.getId()).getPath());
+            final Uri mainImageFileUri = UiHelper.getUri(getApplicationContext(), imgFood.getId());
+            final File mainImageFile = new File(mainImageFileUri.getPath());
             final RequestBody mainImage = RequestBody.create(HttpConstant.IMAGE, mainImageFile);
             final MultipartBody.Part mainImagePart =
                 MultipartBody.Part.createFormData("mainImage", mainImageFile.getName(), mainImage);
@@ -134,21 +179,27 @@ public class AddFoodActivity extends AppCompatActivity {
                     continue;
                 }
 
-                final File file = new File(UiHelper.getUri(stepView.imgStep.getId()).getPath());
+                final Uri fileUri = UiHelper.getUri(getApplicationContext(), stepView.imgStep.getId());
+                final File file = new File(fileUri.getPath());
                 final RequestBody stepBody = RequestBody.create(HttpConstant.IMAGE, file.getName());
                 stepImageParts[i] = MultipartBody.Part.createFormData("stepImage", file.getName(), stepBody);
+
+                final StepUiModel stepData = addStepAdapter.getSteps().get(i);
+                addNewFoodDto.steps.add(
+                    new AddNewFoodDto.AddNewFoodStepDto(stepData.getName(), stepData.getDescription()));
             }
 
-            System.out.println(addStepAdapter.getSteps());
-            //            new HttpService<>(this).instance(FoodService.class)
-//                .addNewFood(mainImagePart, stepImageParts, null)
-//                .enqueue(new Callback<LoginModel>() {
-//                    @Override
-//                    public void onResponse(@NonNull Call<LoginModel> call, @NonNull Response<LoginModel> response) {}
-//
-//                    @Override
-//                    public void onFailure(@NonNull Call<LoginModel> call, @NonNull Throwable t) { }
-//                });
+            final RequestBody requestBody = RequestBody.create(HttpConstant.JSON, ObjectHelper.toJson(addNewFoodDto));
+
+            new HttpService<>(this).instance(FoodService.class)
+                .addNewFood(mainImagePart, stepImageParts, requestBody)
+                .enqueue(new Callback<LoginModel>() {
+                    @Override
+                    public void onResponse(@NonNull Call<LoginModel> call, @NonNull Response<LoginModel> response) {}
+
+                    @Override
+                    public void onFailure(@NonNull Call<LoginModel> call, @NonNull Throwable t) { }
+                });
         });
     }
 
@@ -160,34 +211,60 @@ public class AddFoodActivity extends AppCompatActivity {
     }
 
     private void addEventToUploadImageComponents() {
-        btnUploadImage.setOnClickListener(view -> uploadImage());
-        imgFood.setOnClickListener(view -> uploadImage());
+        btnUploadImage.setOnClickListener(view -> changeImage());
+        imgFood.setOnClickListener(view -> changeImage());
     }
 
-    private void getCountriesData() {
-        final AddFoodActivity thisActivity = this;
-        new HttpService<>(this).instance(CountryService.class)
-            .getCountries()
-            .enqueue(new Callback<List<CountryModel>>() {
-                @Override
-                public void onResponse(@NonNull Call<List<CountryModel>> call, @NonNull Response<List<CountryModel>> response) {
-                    final List<CountryModel> countriesList = response.body();
-                    if (countriesList == null) {
-                        return;
-                    }
+    private void loadCountriesData() {
+        final ArrayList<CountryModel> countriesList =
+            new ArrayList<>(getIntent().getParcelableArrayListExtra(BundleConstant.COUNTRY));
 
-                    countriesList.add(0, new CountryModel().defaultValue());
-                    ArrayAdapter<CountryModel> adapter = new SpinnerAdapter<>(thisActivity, countriesList);
-                    adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-                    spnCountry.setAdapter(adapter);
-                }
-
-                @Override
-                public void onFailure(@NonNull Call<List<CountryModel>> call, @NonNull Throwable t) { }
-            });
+        ArrayAdapter<CountryModel> adapter = new SpinnerAdapter<>(this, countriesList);
+        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        spnCountry.setAdapter(adapter);
     }
 
-    private void uploadImage() {
-        uploadImage(this.btnUploadImage, this.imgFood);
+    private AddNewFoodDto generateDto() throws Exception {
+        final String name = txtFoodName.getText().toString();
+        final String country = ((CountryModel) spnCountry.getSelectedItem()).code;
+        final boolean isVegetarian = cbIsVegetarian.isChecked();
+        final int difficultLevel = (int) ratingBar.getRating();
+        final String timeToCookStr = txtTimeToCook.getText().toString();
+        final String description = txtDescription.getText().toString();
+        final String ingredient = txtIngredient.getText().toString();
+        final String tips = txtTips.getText().toString();
+
+        if (name.isEmpty()) {
+            showToast("Vui lòng nhập tên món ăn");
+            throw new Exception();
+        }
+        if (country.isEmpty()) {
+            showToast("Vui lòng chọn quốc gia");
+            throw new Exception();
+        }
+        if (timeToCookStr.isEmpty()) {
+            showToast("Vui lòng nhập thời gian nấu");
+            throw new Exception();
+        }
+        if (description.isEmpty()) {
+            showToast("Vui lòng nhập mô tả");
+            throw new Exception();
+        }
+        if (ingredient.isEmpty()) {
+            showToast("Vui lòng nhập các thành phần");
+            throw new Exception();
+        }
+
+        final int timeToCook = Integer.parseInt(timeToCookStr);
+
+        return new AddNewFoodDto(name, country, difficultLevel, isVegetarian, description, timeToCook, ingredient, tips);
+    }
+
+    private void changeImage() {
+        changeImage(this.btnUploadImage, this.imgFood);
+    }
+
+    private void showToast(String text) {
+        UiHelper.showToast(this, text);
     }
 }

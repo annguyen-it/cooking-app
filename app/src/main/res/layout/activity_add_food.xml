@@ -75,13 +75,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:contentDescription="@string/rtb_food_difficult_level"
+                android:numStars="3"
+                android:stepSize="1"
                 app:layout_constraintStart_toEndOf="@+id/txtDifficultLevel"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <EditText
-            android:id="@+id/timeToCook"
+            android:id="@+id/txtTimeToCook"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -97,7 +99,7 @@
             app:layout_constraintTop_toBottomOf="@+id/layout_food_difficult_level" />
 
         <EditText
-            android:id="@+id/description"
+            android:id="@+id/txtDescription"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -110,10 +112,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/timeToCook" />
+            app:layout_constraintTop_toBottomOf="@+id/txtTimeToCook" />
 
         <EditText
-            android:id="@+id/ingredient"
+            android:id="@+id/txtIngredient"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -126,10 +128,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/description" />
+            app:layout_constraintTop_toBottomOf="@+id/txtDescription" />
 
         <EditText
-            android:id="@+id/tips"
+            android:id="@+id/txtTips"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -142,7 +144,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ingredient" />
+            app:layout_constraintTop_toBottomOf="@+id/txtIngredient" />
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -154,7 +156,7 @@
             android:layout_marginEnd="32dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tips">
+            app:layout_constraintTop_toBottomOf="@+id/txtTips">
 
             <Button
                 android:id="@+id/btnUploadImage"
@@ -164,7 +166,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
+            <com.example.cookingapp.ui.core.view.AppImageView
                 android:id="@+id/imgUploadFood"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

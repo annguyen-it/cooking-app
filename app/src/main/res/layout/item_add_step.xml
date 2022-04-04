@@ -84,7 +84,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
+        <com.example.cookingapp.ui.core.view.AppImageView
             android:id="@+id/imgStepUploadFood"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

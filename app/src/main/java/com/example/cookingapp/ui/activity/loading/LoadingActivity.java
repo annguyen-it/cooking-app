@@ -21,7 +21,7 @@ import com.example.cookingapp.ui.activity.login.LoginActivity;
 import com.example.cookingapp.util.constant.BundleConstant;
 import com.example.cookingapp.util.constant.PreferencesConstant;
 import com.example.cookingapp.util.helper.DataHelper;
-import com.google.gson.Gson;
+import com.example.cookingapp.util.helper.ObjectHelper;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -90,7 +90,7 @@ public class LoadingActivity extends AppCompatActivity {
                 final UserModel userModel = response.body();
 
                 final Bundle bundle = new Bundle();
-                bundle.putString(BundleConstant.ACCOUNT, new Gson().toJson(userModel));
+                bundle.putString(BundleConstant.ACCOUNT, ObjectHelper.toJson(userModel));
 
                 final Intent intent = new Intent(thisActivity, MainActivity.class);
                 intent.putExtras(bundle);
@@ -101,7 +101,7 @@ public class LoadingActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(@NonNull Call<UserModel> call, @NonNull Throwable t) {
-
+                redirectToLogin();
             }
         };
         new HttpService<>(this).instance(AccountService.class)

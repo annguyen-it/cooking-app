@@ -1,5 +1,7 @@
 package com.example.cookingapp.data.model.core;
 
-public abstract class HasDefaultValue<T> {
+import android.os.Parcelable;
+
+public abstract class HasDefaultValue<T> implements Parcelable {
     public abstract T defaultValue();
 }

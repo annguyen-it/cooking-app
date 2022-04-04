@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.cookingapp.util.constant.PreferencesConstant;
 import com.example.cookingapp.util.helper.DataHelper;
 import com.example.cookingapp.util.setting.AppSetting;
+import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.localebro.okhttpprofiler.OkHttpProfilerInterceptor;
 
 import okhttp3.OkHttpClient;
@@ -34,6 +35,7 @@ public class HttpService<A extends AppCompatActivity> {
         return new OkHttpClient
             .Builder()
             .addInterceptor(new OkHttpProfilerInterceptor())
+            .addNetworkInterceptor(new StethoInterceptor())
             .addInterceptor(chain -> {
                 final String accessToken =
                     DataHelper.getPrefString(PreferencesConstant.ACCESS_TOKEN, activity);

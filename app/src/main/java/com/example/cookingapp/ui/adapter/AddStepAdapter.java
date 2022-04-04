@@ -1,14 +1,12 @@
 package com.example.cookingapp.ui.adapter;
 
 import android.content.Context;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,6 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.cookingapp.R;
 import com.example.cookingapp.data.ui.StepUiModel;
 import com.example.cookingapp.ui.activity.addFood.AddFoodActivity;
+import com.example.cookingapp.ui.core.event.AppTextWatcher;
+import com.example.cookingapp.ui.core.view.AppImageView;
+import com.example.cookingapp.util.helper.UiHelper;
 
 import java.util.List;
 
@@ -53,42 +54,37 @@ public class AddStepAdapter extends RecyclerView.Adapter<AddStepAdapter.ViewHold
         final TextView txtStepName = holder.txtStepName;
         final TextView txtStepDescription = holder.txtStepDescription;
         final Button btnStepAddImage = holder.btnStepAddImage;
-        final ImageView imgStep = holder.imgStep;
+        final AppImageView imgStep = holder.imgStep;
         final Button btnStepRemove = holder.btnStepRemove;
 
         txtStepNumber.setText(context.getString(R.string.txt_step, position + 1));
-        btnStepAddImage.setOnClickListener(view -> activity.uploadImage(btnStepAddImage, imgStep));
+        btnStepAddImage.setOnClickListener(view -> activity.changeImage(btnStepAddImage, imgStep));
         btnStepRemove.setOnClickListener(view -> {
             final int currentPosition = holder.getAdapterPosition();
             steps.remove(currentPosition);
             notifyItemRemoved(currentPosition);
             notifyItemRangeChanged(currentPosition, steps.size() - currentPosition);
         });
-        txtStepName.addTextChangedListener(new TextWatcher() {
+        txtStepName.addTextChangedListener(new AppTextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                steps.get(holder.getAdapterPosition()).setName(charSequence.toString());
+            public void onTextChanged(CharSequence charSequence) {
+                final int position = holder.getAdapterPosition();
+                steps.get(position).setName(charSequence.toString());
             }
-
-            @Override
-            public void afterTextChanged(Editable editable) { }
         });
-        txtStepDescription.addTextChangedListener(new TextWatcher() {
+        txtStepDescription.addTextChangedListener(new AppTextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                steps.get(holder.getAdapterPosition()).setDescription(charSequence.toString());
+            public void onTextChanged(CharSequence charSequence) {
+                final int position = holder.getAdapterPosition();
+                steps.get(position).setDescription(charSequence.toString());
             }
-
-            @Override
-            public void afterTextChanged(Editable editable) { }
         });
-        imgStep.setOnClickListener(view -> activity.uploadImage(btnStepAddImage, imgStep));
+        imgStep.setOnClickListener(view -> activity.changeImage(btnStepAddImage, imgStep));
+        imgStep.setOnImageChangeListener(view -> {
+            final int p = holder.getAdapterPosition();
+            final Uri uri = UiHelper.getUri(activity.getApplicationContext(), view.getId());
+            steps.get(p).setImageUri(uri);
+        });
         imgStep.setVisibility(View.GONE);
     }
 
@@ -109,7 +105,7 @@ public class AddStepAdapter extends RecyclerView.Adapter<AddStepAdapter.ViewHold
         public final EditText txtStepDescription;
         public final Button btnStepAddImage;
         public final Button btnStepRemove;
-        public final ImageView imgStep;
+        public final AppImageView imgStep;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

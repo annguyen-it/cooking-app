@@ -136,6 +136,6 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void showToast(String text) {
-        UiHelper.showToast(SignUpActivity.this, text);
+        UiHelper.showToast(this, text);
     }
 }

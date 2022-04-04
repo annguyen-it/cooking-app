@@ -51,12 +51,15 @@ public class DiscoverFragment extends Fragment {
 
         discoverViewModel = new ViewModelProvider(requireActivity()).get(DiscoverViewModel.class);
         discoverViewModel.getCountry().observe(getViewLifecycleOwner(), countryModels -> {
-            countryModels.add(0,new CountryModel().defaultValue());
+            if (!countryModels.get(0).code.isEmpty()) {
+                countryModels.add(0, new CountryModel().defaultValue());
+            }
             adapterCountry = new SpinnerAdapter<>(requireActivity(), countryModels);
 
             cboNuoc.setAdapter(adapterCountry);
         });
     }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,9 +93,10 @@ public class DiscoverFragment extends Fragment {
             searchView.setFocusable(true);
 
             searchView.setOnQueryTextFocusChangeListener((view, b) -> {
-                if(b){
+                if (b) {
                     showMenuSearch(layout);
-                }else {
+                }
+                else {
                     hideMenuSearch(layout);
                 }
             });
@@ -115,29 +119,28 @@ public class DiscoverFragment extends Fragment {
     }
 
 
-    public void showMenuSearch(View view){
+    public void showMenuSearch(View view) {
         view.setVisibility(View.VISIBLE);
         TranslateAnimation animate = new TranslateAnimation(
-                0,                 // fromXDelta
-                0,                 // toXDelta
-                view.getHeight(),  // fromYDelta
-                0);                // toYDelta
+            0,                 // fromXDelta
+            0,                 // toXDelta
+            view.getHeight(),  // fromYDelta
+            0);                // toYDelta
         animate.setDuration(500);
         animate.setFillAfter(true);
         view.startAnimation(animate);
     }
 
-    public void hideMenuSearch(View view){
+    public void hideMenuSearch(View view) {
         TranslateAnimation animate = new TranslateAnimation(
-                0,                 // fromXDelta
-                0,                 // toXDelta
-                0,                 // fromYDelta
-                -view.getHeight()); // toYDelta
+            0,                 // fromXDelta
+            0,                 // toXDelta
+            0,                 // fromYDelta
+            -view.getHeight()); // toYDelta
         animate.setDuration(500);
         animate.setFillAfter(true);
         view.startAnimation(animate);
     }
-
 
 
 }

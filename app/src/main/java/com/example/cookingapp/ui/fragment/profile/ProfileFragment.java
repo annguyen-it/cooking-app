@@ -13,10 +13,11 @@ import androidx.fragment.app.Fragment;
 
 import com.example.cookingapp.R;
 import com.example.cookingapp.data.model.UserModel;
+import com.example.cookingapp.ui.activity.MainActivity;
 import com.example.cookingapp.ui.activity.addFood.AddFoodActivity;
 import com.example.cookingapp.util.constant.BundleConstant;
+import com.example.cookingapp.util.helper.ObjectHelper;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.gson.Gson;
 
 public class ProfileFragment extends Fragment implements View.OnClickListener {
 
@@ -31,7 +32,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         final FloatingActionButton btnAddFood = view.findViewById(R.id.btnAddFood);
 
         final UserModel userModel =
-            new Gson().fromJson(activityIntent.getStringExtra(BundleConstant.ACCOUNT), UserModel.class);
+            ObjectHelper.fromJson(activityIntent.getStringExtra(BundleConstant.ACCOUNT), UserModel.class);
         btnAddFood.setOnClickListener(this);
         txtName.setText(userModel.getFullName());
 
@@ -47,7 +48,12 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         final int id = view.getId();
         if (id == R.id.btnAddFood) {
-            startActivity(new Intent(getActivity(), AddFoodActivity.class));
+            final MainActivity activity = (MainActivity) getActivity();
+            final Intent intent = new Intent(activity, AddFoodActivity.class);
+            assert activity != null;
+            intent.putParcelableArrayListExtra(BundleConstant.COUNTRY, activity.getCountryList());
+
+            startActivity(intent);
         }
     }
 }

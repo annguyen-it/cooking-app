@@ -110,7 +110,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void showToast(String text) {
-        UiHelper.showToast(LoginActivity.this, text);
+        UiHelper.showToast(this, text);
     }
 
     private void redirectToLoading() {

@@ -16,6 +16,7 @@ import com.example.cookingapp.databinding.ActivityMainBinding;
 import com.example.cookingapp.service.http.CountryService;
 import com.example.cookingapp.service.http.HttpService;
 import com.example.cookingapp.ui.fragment.discover.DiscoverViewModel;
+import com.facebook.stetho.Stetho;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,13 +26,17 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
+    private DiscoverViewModel discoverViewModel;
+    private ArrayList<CountryModel> countryList;
 
-    public List<CountryModel> countryList;
-    public DiscoverViewModel discoverViewModel;
+    public ArrayList<CountryModel> getCountryList() {
+        return countryList;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Stetho.initializeWithDefaults(this);
 
         ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -49,24 +54,22 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
-        countryList = new ArrayList<>();
         discoverViewModel = new ViewModelProvider(this).get(DiscoverViewModel.class);
 
         getCountry();
     }
 
     public void getCountry() {
-        Callback<List<CountryModel>> callback = new Callback<List<CountryModel>>() {
+        Callback<ArrayList<CountryModel>> callback = new Callback<ArrayList<CountryModel>>() {
             @Override
-            public void onResponse(@NonNull Call<List<CountryModel>> call, Response<List<CountryModel>> response) {
+            public void onResponse(@NonNull Call<ArrayList<CountryModel>> call,
+                                   Response<ArrayList<CountryModel>> response) {
                 countryList = response.body();
                 getModelCountry(countryList);
             }
 
             @Override
-            public void onFailure(@NonNull Call<List<CountryModel>> call, @NonNull Throwable ts) {
-
-            }
+            public void onFailure(@NonNull Call<ArrayList<CountryModel>> call, @NonNull Throwable t) { }
         };
         new HttpService<>(this).instance(CountryService.class)
             .getCountries()
