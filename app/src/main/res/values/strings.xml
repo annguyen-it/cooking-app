@@ -49,4 +49,9 @@
     <string name="img_food_details">Food image</string>
     <string name="img_food_step">Step image</string>
     <string name="txt_details_is_vegetarian">Đồ ăn chay</string>
+    <string name="txt_details_time_to_cook">Thời gian: %1$d phút</string>
+    <string name="txt_details_country">Quốc gia: %1$s</string>
+    <string name="txt_details_votes">%1$d lượt đánh giá</string>
+    <string name="txt_details_ingredients">Nguyên liệu: %1$s</string>
+    <string name="txt_details_step">Bước %1$d: %2$s</string>
 </resources>

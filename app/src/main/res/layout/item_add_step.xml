@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/txtStepNumber"
+            android:id="@+id/txtAddStepNumber"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:gravity="center"
@@ -27,7 +27,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnStepRemove"
+            android:id="@+id/btnAddStepRemove"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:insetLeft="0dp"
@@ -44,28 +44,30 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <EditText
-        android:id="@+id/txtStepName"
+        android:id="@+id/txtStepDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:autofillHints="name"
         android:hint="@string/txt_step_name"
         android:inputType="text"
+        android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layout_food_add_title" />
 
     <EditText
-        android:id="@+id/txtStepDescription"
+        android:id="@+id/txtAddStepDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:autofillHints="name"
         android:hint="@string/txt_step_description"
         android:inputType="text"
+        android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtStepName" />
+        app:layout_constraintTop_toBottomOf="@+id/txtStepDescription" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_food_add_image"
@@ -74,10 +76,10 @@
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtStepDescription">
+        app:layout_constraintTop_toBottomOf="@+id/txtAddStepDescription">
 
         <Button
-            android:id="@+id/btnStepAddImage"
+            android:id="@+id/btnAddStepAddImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/btn_step_add_image"
@@ -85,7 +87,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.example.cookingapp.ui.core.view.AppImageView
-            android:id="@+id/imgStepUploadFood"
+            android:id="@+id/imgAddStepUploadFood"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/img_food"

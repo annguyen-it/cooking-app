@@ -1,6 +1,7 @@
 package com.example.cookingapp.data.model;
 
 public class UserModel {
+    private final int id;
     private final String username;
     private final String fullName;
     private final int idImage;
@@ -17,7 +18,8 @@ public class UserModel {
         return idImage;
     }
 
-    public UserModel(String username, String fullName, int idImage) {
+    public UserModel(int id, String username, String fullName, int idImage) {
+        this.id = id;
         this.username = username;
         this.fullName = fullName;
         this.idImage = idImage;

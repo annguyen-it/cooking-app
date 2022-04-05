@@ -16,7 +16,6 @@ import com.example.cookingapp.databinding.ActivityMainBinding;
 import com.example.cookingapp.service.http.CountryService;
 import com.example.cookingapp.service.http.HttpService;
 import com.example.cookingapp.ui.fragment.discover.DiscoverViewModel;
-import com.facebook.stetho.Stetho;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Stetho.initializeWithDefaults(this);
 
         ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());

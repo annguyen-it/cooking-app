@@ -110,12 +110,12 @@ public class AddStepAdapter extends RecyclerView.Adapter<AddStepAdapter.ViewHold
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            txtStepNumber = itemView.findViewById(R.id.txtStepNumber);
-            txtStepName = itemView.findViewById(R.id.txtStepName);
-            txtStepDescription = itemView.findViewById(R.id.txtStepDescription);
-            btnStepAddImage = itemView.findViewById(R.id.btnStepAddImage);
-            btnStepRemove = itemView.findViewById(R.id.btnStepRemove);
-            imgStep = itemView.findViewById(R.id.imgStepUploadFood);
+            txtStepNumber = itemView.findViewById(R.id.txtAddStepNumber);
+            txtStepName = itemView.findViewById(R.id.txtStepDescription);
+            txtStepDescription = itemView.findViewById(R.id.txtAddStepDescription);
+            btnStepAddImage = itemView.findViewById(R.id.btnAddStepAddImage);
+            btnStepRemove = itemView.findViewById(R.id.btnAddStepRemove);
+            imgStep = itemView.findViewById(R.id.imgAddStepUploadFood);
         }
     }
 }

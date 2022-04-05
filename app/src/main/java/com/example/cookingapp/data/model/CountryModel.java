@@ -36,6 +36,11 @@ public class CountryModel extends HasDefaultValue<CountryModel> {
     }
 
     @Override
+    public boolean isDefaultValue() {
+        return code.isEmpty();
+    }
+
+    @Override
     public int describeContents() {
         return 0;
     }

@@ -4,4 +4,6 @@ import android.os.Parcelable;
 
 public abstract class HasDefaultValue<T> implements Parcelable {
     public abstract T defaultValue();
+
+    public abstract boolean isDefaultValue();
 }

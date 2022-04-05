@@ -51,7 +51,7 @@ public class DiscoverFragment extends Fragment {
 
         discoverViewModel = new ViewModelProvider(requireActivity()).get(DiscoverViewModel.class);
         discoverViewModel.getCountry().observe(getViewLifecycleOwner(), countryModels -> {
-            if (!countryModels.get(0).code.isEmpty()) {
+            if (!countryModels.get(0).isDefaultValue()) {
                 countryModels.add(0, new CountryModel().defaultValue());
             }
             adapterCountry = new SpinnerAdapter<>(requireActivity(), countryModels);

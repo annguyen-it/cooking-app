@@ -37,7 +37,6 @@ import com.example.cookingapp.util.constant.BundleConstant;
 import com.example.cookingapp.util.constant.HttpConstant;
 import com.example.cookingapp.util.helper.ObjectHelper;
 import com.example.cookingapp.util.helper.UiHelper;
-import com.facebook.stetho.Stetho;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 
 import java.io.File;
@@ -88,7 +87,6 @@ public class AddFoodActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Stetho.initializeWithDefaults(this);
 
         // Set content view
         final ActivityAddFoodBinding binding = ActivityAddFoodBinding.inflate(getLayoutInflater());

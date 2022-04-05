@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".FoodDetailsActivity"
+            android:name=".ui.activity.foodDetails.FoodDetailsActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activity.login.LoginActivity"
