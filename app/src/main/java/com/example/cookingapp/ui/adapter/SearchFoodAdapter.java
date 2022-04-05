@@ -32,6 +32,7 @@ public class SearchFoodAdapter extends BaseAdapter {
 
     public void setLstFood(List<FoodModel> lstFood) {
         this.lstFood = lstFood;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -63,7 +64,6 @@ public class SearchFoodAdapter extends BaseAdapter {
 
         FoodModel food = lstFood.get(i);
         txtNameFood.setText(food.name);
-        txtNameOwner.setText(food.owner.fullName);
         ratingBar.setRating(food.voteAvg);
 
         return view;

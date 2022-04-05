@@ -25,6 +25,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.cookingapp.R;
+import com.example.cookingapp.data.model.SearchResponseModel;
 import com.example.cookingapp.ui.adapter.SearchFoodAdapter;
 import com.example.cookingapp.data.model.CountryModel;
 import com.example.cookingapp.data.model.FoodModel;
@@ -53,10 +54,9 @@ public class DiscoverFragment extends Fragment {
     private String txtSearch;
     private String countrySearch;
     private CheckBox isVegetarian;
-    private GridView gridViewFood;
 
     private List<FoodModel> arrFood;
-    private SearchFoodAdapter searchFoodAdapter;
+    private SearchFoodAdapter searchFoodAdapter ;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -64,7 +64,7 @@ public class DiscoverFragment extends Fragment {
 
         binding = FragmentDiscoverBinding.inflate(inflater, container, false);
 //        binding.lstSearch.setAdapter(arrayAdapter);
-
+        searchFoodAdapter  = new SearchFoodAdapter(getActivity(),R.layout.item_search_food,new ArrayList<>());
         return binding.getRoot();
     }
 
@@ -104,7 +104,7 @@ public class DiscoverFragment extends Fragment {
 
             }
         });
-
+        grdFood.setAdapter(searchFoodAdapter);
     }
 
     @Override
@@ -192,18 +192,19 @@ public class DiscoverFragment extends Fragment {
     }
 
     private void filter() {
-        List<SearchFoodAdapter> searchFoodAdapterList = new ArrayList<>();
 
         new HttpService<>((MainActivity) getActivity()).instance(FoodService.class)
             .searchFood(txtSearch, isVegetarian.isChecked(), countrySearch)
-            .enqueue(new Callback<List<FoodModel>>() {
+            .enqueue(new Callback<SearchResponseModel>() {
                 @Override
-                public void onResponse(@NonNull Call<List<FoodModel>> call, @NonNull Response<List<FoodModel>> response) {
+                public void onResponse(Call<SearchResponseModel> call, Response<SearchResponseModel> response) {
+                    List<FoodModel> lstFood = response.body().foods;
+                    searchFoodAdapter.setLstFood(lstFood);
 
                 }
 
                 @Override
-                public void onFailure(@NonNull Call<List<FoodModel>> call, @NonNull Throwable t) {
+                public void onFailure(Call<SearchResponseModel> call, Throwable t) {
 
                 }
             });

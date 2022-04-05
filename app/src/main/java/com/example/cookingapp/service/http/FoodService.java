@@ -2,6 +2,7 @@ package com.example.cookingapp.service.http;
 
 import com.example.cookingapp.data.model.FoodModel;
 import com.example.cookingapp.data.model.LoginModel;
+import com.example.cookingapp.data.model.SearchResponseModel;
 
 import java.util.List;
 
@@ -26,7 +27,7 @@ public interface FoodService {
     Call<FoodModel> getFoodById(@Path("id") int id);
 
     @GET("search")
-    Call<List<FoodModel>> searchFood(@Query("q") String q,
-                                   @Query("isVegetarian") Boolean isVegetarina,
-                                   @Query("country") String country);
+    Call<SearchResponseModel> searchFood(@Query("q") String q,
+                                         @Query("isVegetarian") Boolean isVegetarina,
+                                         @Query("country") String country);
 }
