@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ChiTietMonAn">
+    tools:context=".FoodDetailsActivity">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imgDetailsFood"
         android:layout_width="411dp"
         android:layout_height="108dp"
+        android:contentDescription="@string/img_food_details"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -18,7 +19,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/txtTenMon"
+        android:id="@+id/txtDetailsFoodName"
         android:layout_width="138dp"
         android:layout_height="28dp"
         android:textSize="20sp"
@@ -26,40 +27,72 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/imgDetailsFood"
         app:layout_constraintVertical_bias="0.02" />
 
-    <RadioButton
-        android:id="@+id/radioButton"
-        android:layout_width="132dp"
-        android:layout_height="28dp"
-        android:text="Độ Khó"
+    <TextView
+        android:id="@+id/txtDetailsTime"
+        android:layout_width="74dp"
+        android:layout_height="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.047"
+        app:layout_constraintHorizontal_bias="0.772"
+        app:layout_constraintStart_toEndOf="@+id/txtDetailsFoodName"
+        app:layout_constraintTop_toBottomOf="@+id/imgDetailsFood"
+        app:layout_constraintVertical_bias="0.034" />
+
+    <RatingBar
+        android:id="@+id/rtbDetailsRating"
+        android:layout_width="244dp"
+        android:layout_height="41dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.341" />
+        app:layout_constraintTop_toBottomOf="@+id/txtDetailsFoodName"
+        app:layout_constraintVertical_bias="0.014" />
 
     <TextView
-        android:id="@+id/TextView1"
+        android:id="@+id/txtDetailsVote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Time"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.226"
+        app:layout_constraintStart_toEndOf="@+id/rtbDetailsRating"
+        app:layout_constraintTop_toBottomOf="@+id/txtDetailsTime"
+        app:layout_constraintVertical_bias="0.03" />
+
+    <TextView
+        android:id="@+id/txtDetailsDifficultLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.05"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtTenMon"
+        app:layout_constraintTop_toBottomOf="@+id/txtDetailsFoodName"
         app:layout_constraintVertical_bias="0.09" />
 
     <TextView
-        android:id="@+id/TextView2"
+        android:id="@+id/txtTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/txtIsVegetarian"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/txtDetailsDifficultLevel"
+        app:layout_constraintTop_toBottomOf="@+id/txtDetailsFoodName"
+        app:layout_constraintVertical_bias="0.096" />
+
+    <TextView
+        android:id="@+id/txtIsVegetarian"
         android:layout_width="88dp"
         android:layout_height="23dp"
-        android:text="Contry:"
         android:textSize="16sp"
+        android:text="@string/txt_details_is_vegetarian"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.567"
@@ -68,23 +101,32 @@
         app:layout_constraintVertical_bias="0.284" />
 
     <RadioButton
+        android:id="@+id/radioButton"
+        android:layout_width="132dp"
+        android:layout_height="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.047"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.341" />
+
+    <RadioButton
         android:id="@+id/radioButton2"
         android:layout_width="133dp"
-        android:layout_height="27dp"
+        android:layout_height="48dp"
         android:layout_marginStart="68dp"
-        android:text="Đồ ăn chay"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/radioButton"
-        app:layout_constraintTop_toBottomOf="@+id/TextView2"
+        app:layout_constraintTop_toBottomOf="@+id/txtIsVegetarian"
         app:layout_constraintVertical_bias="0.033" />
 
     <TextView
         android:id="@+id/TextView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nguyên liệu:"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -94,10 +136,19 @@
         app:layout_constraintVertical_bias="0.02" />
 
     <TextView
+        android:id="@+id/txtNL"
+        android:layout_width="403dp"
+        android:layout_height="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TextView3"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
         android:id="@+id/TextView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Các bước thực hiện: "
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -115,13 +166,13 @@
         app:layout_constraintHorizontal_bias="0.539"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtBuoc1"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        android:contentDescription="@string/img_food_step" />
 
     <TextView
         android:id="@+id/TextView0"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tips: "
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -134,7 +185,6 @@
         android:id="@+id/TextView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Comments"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -153,36 +203,9 @@
         app:layout_constraintTop_toBottomOf="@+id/TextView5" />
 
     <TextView
-        android:id="@+id/txtTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/TextView2"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/TextView1"
-        app:layout_constraintTop_toBottomOf="@+id/txtTenMon"
-        app:layout_constraintVertical_bias="0.096" />
-
-    <TextView
-        android:id="@+id/txtCountry"
-        android:layout_width="82dp"
-        android:layout_height="23dp"
-        android:text="TextView"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.25"
-        app:layout_constraintStart_toEndOf="@+id/TextView2"
-        app:layout_constraintTop_toBottomOf="@+id/txtTGian"
-        app:layout_constraintVertical_bias="0.082" />
-
-    <TextView
         android:id="@+id/txtBuoc"
         android:layout_width="385dp"
         android:layout_height="48dp"
-        android:text="TextView"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -195,7 +218,6 @@
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Bước 1:"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -208,7 +230,6 @@
         android:id="@+id/txtBuoc1"
         android:layout_width="263dp"
         android:layout_height="26dp"
-        android:text="TextView"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -218,56 +239,9 @@
         app:layout_constraintVertical_bias="0.023" />
 
     <TextView
-        android:id="@+id/txtNL"
-        android:layout_width="403dp"
-        android:layout_height="30dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TextView3"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/txtTGian"
-        android:layout_width="74dp"
-        android:layout_height="25dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.772"
-        app:layout_constraintStart_toEndOf="@+id/txtTenMon"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.034" />
-
-    <RatingBar
-        android:id="@+id/ratingBar"
-        android:layout_width="244dp"
-        android:layout_height="41dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtTenMon"
-        app:layout_constraintVertical_bias="0.014" />
-
-    <TextView
-        android:id="@+id/txtVote"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.226"
-        app:layout_constraintStart_toEndOf="@+id/ratingBar"
-        app:layout_constraintTop_toBottomOf="@+id/txtTGian"
-        app:layout_constraintVertical_bias="0.03" />
-
-    <TextView
         android:id="@+id/txtTips"
         android:layout_width="318dp"
         android:layout_height="41dp"
-        android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.357"

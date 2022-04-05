@@ -131,7 +131,7 @@ public class AddFoodActivity extends AppCompatActivity {
         txtFoodName = findViewById(R.id.txtFoodName);
         spnCountry = findViewById(R.id.spnCountry);
         cbIsVegetarian = findViewById(R.id.cbIsVegetarian);
-        ratingBar = findViewById(R.id.ratingBar);
+        ratingBar = findViewById(R.id.rtbDetailsRating);
         txtTimeToCook = findViewById(R.id.txtTimeToCook);
         txtDescription = findViewById(R.id.txtDescription);
         txtIngredient = findViewById(R.id.txtIngredient);

@@ -64,16 +64,15 @@ public class FoodAdapter extends BaseAdapter {
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        view = inflater.inflate(layout,null);
+        view = inflater.inflate(layout, null);
 
         ImageView imageView = (ImageView) view.findViewById(R.id.imgFood);
         TextView txtNameFood = view.findViewById(R.id.txtNameFood);
         TextView txtNameOwner = view.findViewById(R.id.txtNameOwner);
-        RatingBar ratingBar = view.findViewById(R.id.ratingBar);
+        RatingBar ratingBar = view.findViewById(R.id.rtbDetailsRating);
 
         FoodDto food = lstFood.get(i);
-       // imageView = food.getIdImage();
-
+        // imageView = food.getIdImage();
 
 
         return view;

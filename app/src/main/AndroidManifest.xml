@@ -24,6 +24,9 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".FoodDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.login.LoginActivity"
             android:theme="@style/Theme.CookingApp.NoActionBar" />
         <activity android:name=".ui.activity.MainActivity" />
