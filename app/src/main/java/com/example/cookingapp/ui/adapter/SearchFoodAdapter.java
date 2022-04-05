@@ -15,34 +15,29 @@ import com.example.cookingapp.data.model.FoodModel;
 import java.util.List;
 
 public class SearchFoodAdapter extends BaseAdapter {
-
     private final Context context;
     private final int layout;
-    private List<FoodModel> lstFood;
+    private List<FoodModel> listFood;
 
-    public SearchFoodAdapter(Context context, int layout, List<FoodModel> lstFood) {
+    public SearchFoodAdapter(Context context, int layout, List<FoodModel> listFood) {
         this.context = context;
         this.layout = layout;
-        this.lstFood = lstFood;
+        this.listFood = listFood;
     }
 
-    public List<FoodModel> getLstFood() {
-        return lstFood;
-    }
-
-    public void setLstFood(List<FoodModel> lstFood) {
-        this.lstFood = lstFood;
+    public void setListFood(List<FoodModel> listFood) {
+        this.listFood = listFood;
         notifyDataSetChanged();
     }
 
     @Override
     public int getCount() {
-        return lstFood.size();
+        return listFood.size();
     }
 
     @Override
-    public Object getItem(int i) {
-        return null;
+    public FoodModel getItem(int i) {
+        return listFood.get(i);
     }
 
     @Override
@@ -62,7 +57,7 @@ public class SearchFoodAdapter extends BaseAdapter {
         TextView txtNameOwner = view.findViewById(R.id.txtNameOwner);
         RatingBar ratingBar = view.findViewById(R.id.rtbDetailsRating);
 
-        FoodModel food = lstFood.get(i);
+        FoodModel food = listFood.get(i);
         txtNameFood.setText(food.name);
         ratingBar.setRating(food.voteAvg);
 

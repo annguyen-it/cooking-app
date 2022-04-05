@@ -1,5 +1,6 @@
 package com.example.cookingapp.ui.fragment.discover;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -26,6 +27,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.cookingapp.R;
 import com.example.cookingapp.data.model.SearchResponseModel;
+import com.example.cookingapp.ui.activity.foodDetails.FoodDetailsActivity;
 import com.example.cookingapp.ui.adapter.SearchFoodAdapter;
 import com.example.cookingapp.data.model.CountryModel;
 import com.example.cookingapp.data.model.FoodModel;
@@ -34,6 +36,7 @@ import com.example.cookingapp.service.http.FoodService;
 import com.example.cookingapp.service.http.HttpService;
 import com.example.cookingapp.ui.activity.MainActivity;
 import com.example.cookingapp.ui.adapter.SpinnerAdapter;
+import com.example.cookingapp.util.constant.BundleConstant;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,68 +46,31 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class DiscoverFragment extends Fragment {
-    //String[] name = {"A", "AB", "BC"};
     private FragmentDiscoverBinding binding;
     private static ConstraintLayout layout;
-    private Spinner cboNuoc;
+    private Spinner cboCountry;
     private SpinnerAdapter<CountryModel> adapterCountry;
     public DiscoverViewModel discoverViewModel;
-    private Button btnLoc;
-    private GridView grdFood;
     private String txtSearch;
     private String countrySearch;
     private CheckBox isVegetarian;
+    private Button btnFilter;
+    private GridView grdFood;
 
-    private List<FoodModel> arrFood;
-    private SearchFoodAdapter searchFoodAdapter ;
+    private SearchFoodAdapter searchFoodAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-//        DiscoverViewModel discoverViewModel = new ViewModelProvider(this).get(DiscoverViewModel.class);
-
         binding = FragmentDiscoverBinding.inflate(inflater, container, false);
-//        binding.lstSearch.setAdapter(arrayAdapter);
-        searchFoodAdapter  = new SearchFoodAdapter(getActivity(),R.layout.item_search_food,new ArrayList<>());
+        searchFoodAdapter = new SearchFoodAdapter(getActivity(), R.layout.item_search_food, new ArrayList<>());
         return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        txtSearch = "";
-        countrySearch = "";
-        layout = view.findViewById(R.id.layoutTimKiem);
-        cboNuoc = view.findViewById(R.id.cboNuoc);
-        btnLoc = view.findViewById(R.id.btnLoc);
-        grdFood = view.findViewById(R.id.grvFood);
-        isVegetarian = view.findViewById(R.id.ckbDoAnChay);
-        grdFood = view.findViewById(R.id.grvFood);
-        arrFood = new ArrayList<>();
-
-        discoverViewModel = new ViewModelProvider(requireActivity()).get(DiscoverViewModel.class);
-        discoverViewModel.getCountry().observe(getViewLifecycleOwner(), countryModels -> {
-            if (!countryModels.get(0).isDefaultValue()) {
-                countryModels.add(0, new CountryModel().defaultValue());
-            }
-            adapterCountry = new SpinnerAdapter<>(requireActivity(), countryModels);
-
-            cboNuoc.setAdapter(adapterCountry);
-        });
-
-        btnLoc.setOnClickListener(view1 -> filter());
-
-        cboNuoc.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                countrySearch = adapterCountry.getItem(i).code;
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-        grdFood.setAdapter(searchFoodAdapter);
+        bindComponents(view);
+        addEventToComponents();
     }
 
     @Override
@@ -167,6 +133,48 @@ public class DiscoverFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
     }
 
+    public void bindComponents(@NonNull View view) {
+        txtSearch = "";
+        countrySearch = "";
+        layout = view.findViewById(R.id.layoutTimKiem);
+        cboCountry = view.findViewById(R.id.cboNuoc);
+        isVegetarian = view.findViewById(R.id.ckbDoAnChay);
+        btnFilter = view.findViewById(R.id.btnLoc);
+        grdFood = view.findViewById(R.id.grvFood);
+    }
+
+    public void addEventToComponents() {
+        btnFilter.setOnClickListener(v -> filter());
+
+        discoverViewModel = new ViewModelProvider(requireActivity()).get(DiscoverViewModel.class);
+        discoverViewModel.getCountry().observe(getViewLifecycleOwner(), countryModels -> {
+            if (!countryModels.get(0).isDefaultValue()) {
+                countryModels.add(0, new CountryModel().defaultValue());
+            }
+            adapterCountry = new SpinnerAdapter<>(requireActivity(), countryModels);
+            cboCountry.setAdapter(adapterCountry);
+        });
+
+        cboCountry.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                countrySearch = adapterCountry.getItem(i).code;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) { }
+        });
+
+        grdFood.setAdapter(searchFoodAdapter);
+        grdFood.setOnItemClickListener((adapterView, view1, i, l) -> {
+            final MainActivity activity = (MainActivity) getActivity();
+            final Intent intent = new Intent(activity, FoodDetailsActivity.class);
+            assert activity != null;
+            intent.putExtra(BundleConstant.FOOD, searchFoodAdapter.getItem(i).id);
+
+            startActivity(intent);
+        });
+    }
 
     public void showMenuSearch(View view) {
         view.setVisibility(View.VISIBLE);
@@ -182,31 +190,32 @@ public class DiscoverFragment extends Fragment {
 
     public void hideMenuSearch(View view) {
         TranslateAnimation animate = new TranslateAnimation(
-            0,                 // fromXDelta
-            0,                 // toXDelta
-            0,                 // fromYDelta
+            0,                  // fromXDelta
+            0,                  // toXDelta
+            0,                  // fromYDelta
             -view.getHeight()); // toYDelta
         animate.setDuration(500);
         animate.setFillAfter(true);
         view.startAnimation(animate);
+        view.setVisibility(View.GONE);
     }
 
     private void filter() {
-
         new HttpService<>((MainActivity) getActivity()).instance(FoodService.class)
             .searchFood(txtSearch, isVegetarian.isChecked(), countrySearch)
             .enqueue(new Callback<SearchResponseModel>() {
                 @Override
-                public void onResponse(Call<SearchResponseModel> call, Response<SearchResponseModel> response) {
-                    List<FoodModel> lstFood = response.body().foods;
-                    searchFoodAdapter.setLstFood(lstFood);
+                public void onResponse(@NonNull Call<SearchResponseModel> call, @NonNull Response<SearchResponseModel> response) {
+                    if (!response.isSuccessful() || response.body() == null) {
+                        return;
+                    }
 
+                    List<FoodModel> lstFood = response.body().foods;
+                    searchFoodAdapter.setListFood(lstFood);
                 }
 
                 @Override
-                public void onFailure(Call<SearchResponseModel> call, Throwable t) {
-
-                }
+                public void onFailure(@NonNull Call<SearchResponseModel> call, @NonNull Throwable t) { }
             });
     }
 }
