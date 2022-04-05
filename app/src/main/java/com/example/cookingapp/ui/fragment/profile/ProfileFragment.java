@@ -39,7 +39,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         btnAddFood.setOnClickListener(this);
         btnMyFood.setOnClickListener(this);
         imgAvatar.setOnClickListener(this);
-        txtName.setText(userModel.getFullName());
+        txtName.setText(userModel.fullName);
 
         return view;
     }

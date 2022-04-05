@@ -11,11 +11,9 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.cookingapp.R;
-import com.example.cookingapp.data.dto.FoodDto;
 import com.example.cookingapp.data.model.CountryModel;
 import com.example.cookingapp.databinding.ActivityMainBinding;
 import com.example.cookingapp.service.http.CountryService;
-import com.example.cookingapp.service.http.FoodService;
 import com.example.cookingapp.service.http.HttpService;
 import com.example.cookingapp.ui.fragment.discover.DiscoverViewModel;
 

@@ -12,11 +12,9 @@ import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.SearchView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
@@ -27,16 +25,14 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.cookingapp.R;
-import com.example.cookingapp.adapter.FoodAdapter;
-import com.example.cookingapp.data.dto.FoodDto;
+import com.example.cookingapp.ui.adapter.SearchFoodAdapter;
 import com.example.cookingapp.data.model.CountryModel;
+import com.example.cookingapp.data.model.FoodModel;
 import com.example.cookingapp.databinding.FragmentDiscoverBinding;
-import com.example.cookingapp.service.http.CountryService;
 import com.example.cookingapp.service.http.FoodService;
 import com.example.cookingapp.service.http.HttpService;
 import com.example.cookingapp.ui.activity.MainActivity;
 import com.example.cookingapp.ui.adapter.SpinnerAdapter;
-import com.example.cookingapp.util.helper.ObjectHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,8 +55,8 @@ public class DiscoverFragment extends Fragment {
     private CheckBox isVegetarian;
     private GridView gridViewFood;
 
-    private List<FoodDto> arrFood;
-    private FoodAdapter foodAdapter;
+    private List<FoodModel> arrFood;
+    private SearchFoodAdapter searchFoodAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -95,9 +91,7 @@ public class DiscoverFragment extends Fragment {
             cboNuoc.setAdapter(adapterCountry);
         });
 
-        btnLoc.setOnClickListener(view1 -> {
-            filter();
-        });
+        btnLoc.setOnClickListener(view1 -> filter());
 
         cboNuoc.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -164,7 +158,7 @@ public class DiscoverFragment extends Fragment {
                 public boolean onQueryTextChange(String s) {
                     //arrayAdapter.getFilter().filter(s);
                     txtSearch = s;
-                    Log.e("123",txtSearch);
+                    Log.e("123", txtSearch);
                     return false;
                 }
             });
@@ -197,23 +191,21 @@ public class DiscoverFragment extends Fragment {
         view.startAnimation(animate);
     }
 
-    private void filter (){
-        List<FoodAdapter> foodAdapterList = new ArrayList<>();
+    private void filter() {
+        List<SearchFoodAdapter> searchFoodAdapterList = new ArrayList<>();
 
-        new HttpService<>((MainActivity)getActivity()).instance(FoodService.class)
-                .searchFood(txtSearch,isVegetarian.isChecked(),countrySearch)
-                .enqueue(new Callback<List<FoodDto>>() {
-                    @Override
-                    public void onResponse(Call<List<FoodDto>> call, Response<List<FoodDto>> response) {
+        new HttpService<>((MainActivity) getActivity()).instance(FoodService.class)
+            .searchFood(txtSearch, isVegetarian.isChecked(), countrySearch)
+            .enqueue(new Callback<List<FoodModel>>() {
+                @Override
+                public void onResponse(@NonNull Call<List<FoodModel>> call, @NonNull Response<List<FoodModel>> response) {
 
-                    }
+                }
 
-                    @Override
-                    public void onFailure(Call<List<FoodDto>> call, Throwable t) {
+                @Override
+                public void onFailure(@NonNull Call<List<FoodModel>> call, @NonNull Throwable t) {
 
-                    }
-                });
+                }
+            });
     }
-
-
 }
