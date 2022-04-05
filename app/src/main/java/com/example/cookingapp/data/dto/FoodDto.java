@@ -8,11 +8,13 @@ import com.example.cookingapp.data.ui.StepUiModel;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 public class FoodDto {
     private int id;
     private UserDto owner;
     private String name;
-    private Uri idImage;
+    private ImageDto image;
     private String description;
     private boolean isVegetarian;
     private int difficultLevel;
@@ -21,130 +23,35 @@ public class FoodDto {
     private Date timePost;
     private String ingredient;
     private String tips;
-    private float rate;
+    private float voteAvg;
     private int voteCount;
     private List<StepUiModel> steps;
 
-    public FoodDto(int id) {
-        this.id = id;
-    }
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
+    public FoodDto(@Nullable float voteAvg, int id, String name, boolean isVegetarian, int difficultLevel, int timeToCook, ImageDto image, CountryModel country) {
         this.id = id;
+        this.name = name;
+        this.image = image;
+        this.isVegetarian = isVegetarian;
+        this.difficultLevel = difficultLevel;
+        this.timeToCook = timeToCook;
+        this.country = country;
+        this.voteAvg = voteAvg;
     }
 
     public UserDto getOwner() {
         return owner;
     }
 
-    public void setOwner(UserDto owner) {
-        this.owner = owner;
-    }
-
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public ImageDto getImage() {
+        return image;
     }
 
-    public Uri getIdImage() {
-        return idImage;
-    }
-
-    public void setIdImage(Uri idImage) {
-        this.idImage = idImage;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public boolean isVegetarian() {
-        return isVegetarian;
-    }
-
-    public void setVegetarian(boolean vegetarian) {
-        isVegetarian = vegetarian;
-    }
-
-    public int getDifficultLevel() {
-        return difficultLevel;
-    }
-
-    public void setDifficultLevel(int difficultLevel) {
-        this.difficultLevel = difficultLevel;
-    }
-
-    public int getTimeToCook() {
-        return timeToCook;
-    }
-
-    public void setTimeToCook(int timeToCook) {
-        this.timeToCook = timeToCook;
-    }
-
-    public CountryModel getCountry() {
-        return country;
-    }
-
-    public void setCountry(CountryModel country) {
-        this.country = country;
-    }
-
-    public Date getTimePost() {
-        return timePost;
-    }
-
-    public void setTimePost(Date timePost) {
-        this.timePost = timePost;
-    }
-
-    public String getIngredient() {
-        return ingredient;
-    }
-
-    public void setIngredient(String ingredient) {
-        this.ingredient = ingredient;
-    }
-
-    public String getTips() {
-        return tips;
-    }
-
-    public void setTips(String tips) {
-        this.tips = tips;
-    }
-
-    public float getRate() {
-        return rate;
-    }
-
-    public void setRate(float rate) {
-        this.rate = rate;
-    }
-
-    public int getVoteCount() {
-        return voteCount;
-    }
-
-    public void setVoteCount(int voteCount) {
-        this.voteCount = voteCount;
-    }
-
-    public List<StepUiModel> getSteps() {
-        return steps;
-    }
-
-    public void setSteps(List<StepUiModel> steps) {
-        this.steps = steps;
+    public float getVoteAvg() {
+        return voteAvg;
     }
 }

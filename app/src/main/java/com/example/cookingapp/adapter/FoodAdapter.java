@@ -20,20 +20,10 @@ public class FoodAdapter extends BaseAdapter {
     private int layout;
     private List<FoodDto> lstFood;
 
-    public Context getContext() {
-        return context;
-    }
-
-    public void setContext(Context context) {
+    public FoodAdapter(Context context, int layout, List<FoodDto> lstFood) {
         this.context = context;
-    }
-
-    public int getLayout() {
-        return layout;
-    }
-
-    public void setLayout(int layout) {
         this.layout = layout;
+        this.lstFood = lstFood;
     }
 
     public List<FoodDto> getLstFood() {
@@ -72,9 +62,9 @@ public class FoodAdapter extends BaseAdapter {
         RatingBar ratingBar = view.findViewById(R.id.ratingBar);
 
         FoodDto food = lstFood.get(i);
-       // imageView = food.getIdImage();
-
-
+        txtNameFood.setText(food.getName());
+        txtNameOwner.setText(food.getOwner().getUserName());
+        ratingBar.setRating(food.getVoteAvg());
 
         return view;
     }

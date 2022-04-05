@@ -9,7 +9,6 @@
         <entry key="..\:/Users/An Nguyen/Documents/Study/S6/mobile/CookingApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2717948717948718" />
         <entry key="..\:/Users/An Nguyen/Documents/Study/S6/mobile/CookingApp/app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.15" />
         <entry key="..\:/Users/An Nguyen/Documents/Study/S6/mobile/CookingApp/app/src/main/res/layout/activity_add_food.xml" value="0.2" />
-        <entry key="..\:/Users/An Nguyen/Documents/Study/S6/mobile/CookingApp/app/src/main/res/layout/activity_loading.xml" value="0.12639311043566362" />
         <entry key="..\:/Users/An Nguyen/Documents/Study/S6/mobile/CookingApp/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Users/An Nguyen/Documents/Study/S6/mobile/CookingApp/app/src/main/res/layout/activity_main.xml" value="0.19610507246376813" />
         <entry key="..\:/Users/An Nguyen/Documents/Study/S6/mobile/CookingApp/app/src/main/res/layout/activity_sign_up.xml" value="0.16770833333333332" />
@@ -27,11 +26,13 @@
         <entry key="..\:/Users/An Nguyen/Documents/Study/S6/mobile/CookingApp/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1" />
         <entry key="..\:/Users/An Nguyen/Documents/Study/S6/mobile/CookingApp/app/src/main/res/menu/menu.xml" value="0.2558974358974359" />
         <entry key="..\:/Users/phamt/Desktop/cooking-app1/app/src/main/res/layout/activity_add_food.xml" value="0.16486486486486487" />
+        <entry key="..\:/Users/phamt/Desktop/cooking-app1/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/phamt/Desktop/cooking-app1/app/src/main/res/layout/activity_sign_up.xml" value="0.16486486486486487" />
         <entry key="..\:/Users/phamt/Desktop/cooking-app1/app/src/main/res/layout/food.xml" value="0.16486486486486487" />
         <entry key="..\:/Users/phamt/Desktop/cooking-app1/app/src/main/res/layout/fragment_discover.xml" value="0.16486486486486487" />
         <entry key="..\:/Users/phamt/Desktop/cooking-app1/app/src/main/res/layout/fragment_profile.xml" value="0.16486486486486487" />
         <entry key="..\:/Users/phamt/Desktop/cooking-app1/app/src/main/res/layout/item_add_step.xml" value="0.16486486486486487" />
+        <entry key="..\:/Users/phamt/Desktop/cooking-app1/app/src/main/res/menu/menu.xml" value="0.1" />
       </map>
     </option>
   </component>

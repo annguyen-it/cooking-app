@@ -1,6 +1,7 @@
 package com.example.cookingapp.ui.fragment.profile;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,8 +17,15 @@ import com.example.cookingapp.data.model.UserModel;
 import com.example.cookingapp.ui.activity.MainActivity;
 import com.example.cookingapp.ui.activity.addFood.AddFoodActivity;
 import com.example.cookingapp.util.constant.BundleConstant;
+import com.example.cookingapp.util.constant.HttpConstant;
 import com.example.cookingapp.util.helper.ObjectHelper;
+import com.example.cookingapp.util.helper.UiHelper;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.io.File;
+
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 public class ProfileFragment extends Fragment implements View.OnClickListener {
 
@@ -34,6 +42,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         final UserModel userModel =
             ObjectHelper.fromJson(activityIntent.getStringExtra(BundleConstant.ACCOUNT), UserModel.class);
         btnAddFood.setOnClickListener(this);
+
         txtName.setText(userModel.getFullName());
 
         return view;

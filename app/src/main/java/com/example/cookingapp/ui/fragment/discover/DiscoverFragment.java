@@ -1,6 +1,7 @@
 package com.example.cookingapp.ui.fragment.discover;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -8,8 +9,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.TranslateAnimation;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.SearchView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
@@ -20,9 +27,23 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.cookingapp.R;
+import com.example.cookingapp.adapter.FoodAdapter;
+import com.example.cookingapp.data.dto.FoodDto;
 import com.example.cookingapp.data.model.CountryModel;
 import com.example.cookingapp.databinding.FragmentDiscoverBinding;
+import com.example.cookingapp.service.http.CountryService;
+import com.example.cookingapp.service.http.FoodService;
+import com.example.cookingapp.service.http.HttpService;
+import com.example.cookingapp.ui.activity.MainActivity;
 import com.example.cookingapp.ui.adapter.SpinnerAdapter;
+import com.example.cookingapp.util.helper.ObjectHelper;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class DiscoverFragment extends Fragment {
     //String[] name = {"A", "AB", "BC"};
@@ -31,7 +52,15 @@ public class DiscoverFragment extends Fragment {
     private Spinner cboNuoc;
     private SpinnerAdapter<CountryModel> adapterCountry;
     public DiscoverViewModel discoverViewModel;
+    private Button btnLoc;
+    private GridView grdFood;
+    private String txtSearch;
+    private String countrySearch;
+    private CheckBox isVegetarian;
+    private GridView gridViewFood;
 
+    private List<FoodDto> arrFood;
+    private FoodAdapter foodAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -46,8 +75,15 @@ public class DiscoverFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        txtSearch = "";
+        countrySearch = "";
         layout = view.findViewById(R.id.layoutTimKiem);
         cboNuoc = view.findViewById(R.id.cboNuoc);
+        btnLoc = view.findViewById(R.id.btnLoc);
+        grdFood = view.findViewById(R.id.grvFood);
+        isVegetarian = view.findViewById(R.id.ckbDoAnChay);
+        grdFood = view.findViewById(R.id.grvFood);
+        arrFood = new ArrayList<>();
 
         discoverViewModel = new ViewModelProvider(requireActivity()).get(DiscoverViewModel.class);
         discoverViewModel.getCountry().observe(getViewLifecycleOwner(), countryModels -> {
@@ -58,6 +94,23 @@ public class DiscoverFragment extends Fragment {
 
             cboNuoc.setAdapter(adapterCountry);
         });
+
+        btnLoc.setOnClickListener(view1 -> {
+            filter();
+        });
+
+        cboNuoc.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                countrySearch = adapterCountry.getItem(i).code;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
     }
 
     @Override
@@ -110,6 +163,8 @@ public class DiscoverFragment extends Fragment {
                 @Override
                 public boolean onQueryTextChange(String s) {
                     //arrayAdapter.getFilter().filter(s);
+                    txtSearch = s;
+                    Log.e("123",txtSearch);
                     return false;
                 }
             });
@@ -140,6 +195,24 @@ public class DiscoverFragment extends Fragment {
         animate.setDuration(500);
         animate.setFillAfter(true);
         view.startAnimation(animate);
+    }
+
+    private void filter (){
+        List<FoodAdapter> foodAdapterList = new ArrayList<>();
+
+        new HttpService<>((MainActivity)getActivity()).instance(FoodService.class)
+                .searchFood(txtSearch,isVegetarian.isChecked(),countrySearch)
+                .enqueue(new Callback<List<FoodDto>>() {
+                    @Override
+                    public void onResponse(Call<List<FoodDto>> call, Response<List<FoodDto>> response) {
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<FoodDto>> call, Throwable t) {
+
+                    }
+                });
     }
 
 
