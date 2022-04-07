@@ -57,4 +57,6 @@
     <string name="txt_details_rate_food">Đánh giá món ăn</string>
     <string name="btn_details_rate_food">Gửi đánh giá</string>
     <string name="txt_details_my_rate">Đánh giá của tôi</string>
+    <string name="txt_rate_comment">Hãy chia sẽ những điều bạn thích về món ăn</string>
+    <string name="confirm">Xác nhận</string>
 </resources>

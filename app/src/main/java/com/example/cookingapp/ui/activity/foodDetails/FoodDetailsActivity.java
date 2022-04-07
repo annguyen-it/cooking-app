@@ -21,6 +21,7 @@ import com.example.cookingapp.data.model.FoodModel;
 import com.example.cookingapp.data.model.RateModel;
 import com.example.cookingapp.data.model.StepModel;
 import com.example.cookingapp.data.model.UserModel;
+import com.example.cookingapp.data.ui.FoodUiModel;
 import com.example.cookingapp.service.http.FoodService;
 import com.example.cookingapp.service.http.HttpService;
 import com.example.cookingapp.ui.adapter.StepAdapter;
@@ -53,7 +54,6 @@ public class FoodDetailsActivity extends AppCompatActivity {
     private TextView txtDetailsIsVegetarian;
     private TextView txtDetailsIngredient;
     private TextView txtDetailsRateFood;
-    private RatingBar rtbDetailsRateFood;
     private Button btnDetailsRateFood;
     private ConstraintLayout layoutLoading;
 
@@ -83,7 +83,6 @@ public class FoodDetailsActivity extends AppCompatActivity {
         txtDetailsIsVegetarian = findViewById(R.id.txtDetailsIsVegetarian);
         txtDetailsIngredient = findViewById(R.id.txtDetailsIngredient);
         txtDetailsRateFood = findViewById(R.id.txtDetailsRateFood);
-        rtbDetailsRateFood = findViewById(R.id.rtbDetailsRateFood);
         btnDetailsRateFood = findViewById(R.id.btnDetailsRateFood);
         layoutLoading = findViewById(R.id.layoutLoading);
         final RecyclerView rvSteps = findViewById(R.id.layout_step_list);
@@ -96,13 +95,13 @@ public class FoodDetailsActivity extends AppCompatActivity {
 
     private void getFoodInfo() {
         final Intent intent = getIntent();
-        final int foodId = intent.getIntExtra(BundleConstant.FOOD, 0);
+        final int foodId = intent.getIntExtra(BundleConstant.FOOD_ID, 0);
         user = ObjectHelper.fromJson(intent.getStringExtra(BundleConstant.ACCOUNT), UserModel.class);
 
         Callback<FoodModel> callback = new Callback<FoodModel>() {
             @Override
             public void onResponse(@NonNull Call<FoodModel> call,
-                                   Response<FoodModel> response) {
+                                   @NonNull Response<FoodModel> response) {
                 if (!response.isSuccessful()) {
                     return;
                 }
@@ -151,14 +150,18 @@ public class FoodDetailsActivity extends AppCompatActivity {
             .orElse(null);
         if (myRate != null) {
             txtDetailsRateFood.setText(context.getString(R.string.txt_details_my_rate));
-            rtbDetailsRateFood.setRating(myRate.rate);
-            rtbDetailsRateFood.setIsIndicator(true);
             btnDetailsRateFood.setVisibility(View.GONE);
         }
         else {
-            btnDetailsRateFood.setOnClickListener(view -> {
-
-            });
+            btnDetailsRateFood.setOnClickListener(view -> rate());
         }
+    }
+
+    private void rate() {
+        final Intent intent = new Intent(this, RateActivity.class);
+        final FoodUiModel foodUiModel = new FoodUiModel(food);
+        intent.putExtra(BundleConstant.FOOD, ObjectHelper.toJson(foodUiModel));
+
+        startActivity(intent);
     }
 }

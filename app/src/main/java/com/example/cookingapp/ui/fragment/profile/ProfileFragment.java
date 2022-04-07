@@ -52,7 +52,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public void onClick(View view) {
+    public void onClick(@NonNull View view) {
         final int id = view.getId();
         if (id == R.id.btnAddFood) {
             final MainActivity activity = (MainActivity) getActivity();
@@ -66,7 +66,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
             final MainActivity activity = (MainActivity) getActivity();
             final Intent intent = new Intent(activity, FoodDetailsActivity.class);
             assert activity != null;
-            intent.putExtra(BundleConstant.FOOD, 11)
+            intent.putExtra(BundleConstant.FOOD_ID, 11)
                 .putExtra(BundleConstant.ACCOUNT, accountExtra);
 
             startActivity(intent);

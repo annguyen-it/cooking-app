@@ -170,13 +170,13 @@ public class DiscoverFragment extends Fragment {
             final MainActivity activity = (MainActivity) getActivity();
             final Intent intent = new Intent(activity, FoodDetailsActivity.class);
             assert activity != null;
-            intent.putExtra(BundleConstant.FOOD, searchFoodAdapter.getItem(i).id);
+            intent.putExtra(BundleConstant.FOOD_ID, searchFoodAdapter.getItem(i).id);
 
             startActivity(intent);
         });
     }
 
-    public void showMenuSearch(View view) {
+    public void showMenuSearch(@NonNull View view) {
         view.setVisibility(View.VISIBLE);
         TranslateAnimation animate = new TranslateAnimation(
             0,                 // fromXDelta
@@ -188,7 +188,7 @@ public class DiscoverFragment extends Fragment {
         view.startAnimation(animate);
     }
 
-    public void hideMenuSearch(View view) {
+    public void hideMenuSearch(@NonNull View view) {
         TranslateAnimation animate = new TranslateAnimation(
             0,                  // fromXDelta
             0,                  // toXDelta
