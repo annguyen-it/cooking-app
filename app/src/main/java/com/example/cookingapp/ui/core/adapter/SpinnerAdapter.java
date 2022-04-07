@@ -1,4 +1,4 @@
-package com.example.cookingapp.ui.adapter;
+package com.example.cookingapp.ui.core.adapter;
 
 import android.content.Context;
 import android.graphics.Color;

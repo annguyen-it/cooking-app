@@ -35,7 +35,7 @@ import com.example.cookingapp.databinding.FragmentDiscoverBinding;
 import com.example.cookingapp.service.http.FoodService;
 import com.example.cookingapp.service.http.HttpService;
 import com.example.cookingapp.ui.activity.MainActivity;
-import com.example.cookingapp.ui.adapter.SpinnerAdapter;
+import com.example.cookingapp.ui.core.adapter.SpinnerAdapter;
 import com.example.cookingapp.util.constant.BundleConstant;
 
 import java.util.ArrayList;

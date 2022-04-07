@@ -30,7 +30,7 @@ import com.example.cookingapp.databinding.ActivityAddFoodBinding;
 import com.example.cookingapp.service.http.FoodService;
 import com.example.cookingapp.service.http.HttpService;
 import com.example.cookingapp.ui.adapter.AddStepAdapter;
-import com.example.cookingapp.ui.adapter.SpinnerAdapter;
+import com.example.cookingapp.ui.core.adapter.SpinnerAdapter;
 import com.example.cookingapp.ui.core.view.AppImageView;
 import com.example.cookingapp.util.constant.AppConstant;
 import com.example.cookingapp.util.constant.BundleConstant;
