@@ -6,6 +6,8 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.view.View;
+import android.view.animation.AlphaAnimation;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -77,5 +79,13 @@ public class UiHelper {
         new HttpService<>(activity).instance(FileService.class)
             .getByName(imageName)
             .enqueue(callback);
+    }
+
+    public static void fade(View view, int duration) {
+        AlphaAnimation animate = new AlphaAnimation(1, 0);
+        animate.setDuration(duration);
+        animate.setFillAfter(true);
+        view.startAnimation(animate);
+        view.setVisibility(View.GONE);
     }
 }

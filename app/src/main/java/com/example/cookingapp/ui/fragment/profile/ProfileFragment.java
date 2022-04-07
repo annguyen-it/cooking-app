@@ -22,11 +22,13 @@ import com.example.cookingapp.util.helper.ObjectHelper;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class ProfileFragment extends Fragment implements View.OnClickListener {
+    String accountExtra;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_profile, container, false);
         final Intent activityIntent = requireActivity().getIntent();
+        accountExtra = activityIntent.getStringExtra(BundleConstant.ACCOUNT);
 
         // Binding components
         final TextView txtName = view.findViewById(R.id.txtName);
@@ -34,8 +36,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         final FloatingActionButton btnAddFood = view.findViewById(R.id.btnAddFood);
         final Button btnMyFood = view.findViewById(R.id.btnMyFood);
 
-        final UserModel userModel =
-            ObjectHelper.fromJson(activityIntent.getStringExtra(BundleConstant.ACCOUNT), UserModel.class);
+        // Add events
+        final UserModel userModel = ObjectHelper.fromJson(accountExtra, UserModel.class);
         btnAddFood.setOnClickListener(this);
         btnMyFood.setOnClickListener(this);
         imgAvatar.setOnClickListener(this);
@@ -64,7 +66,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
             final MainActivity activity = (MainActivity) getActivity();
             final Intent intent = new Intent(activity, FoodDetailsActivity.class);
             assert activity != null;
-            intent.putExtra(BundleConstant.FOOD, 11);
+            intent.putExtra(BundleConstant.FOOD, 11)
+                .putExtra(BundleConstant.ACCOUNT, accountExtra);
 
             startActivity(intent);
         }

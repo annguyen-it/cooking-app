@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:background="#ffffff">
 
-
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyle"

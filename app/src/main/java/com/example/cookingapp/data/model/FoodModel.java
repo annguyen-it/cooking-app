@@ -18,11 +18,12 @@ public class FoodModel {
     public final UserModel owner;
     public final CountryModel country;
     public final List<StepModel> steps;
+    public final List<RateModel> rates;
     public final ImageModel image;
 
     public FoodModel(int id, String name, String description, boolean isVegetarian, int difficultLevel, int timeToCook,
                      Date timePost, String ingredient, String tips, float voteAvg, int voteCount, UserModel owner,
-                     CountryModel country, List<StepModel> steps, ImageModel image) {
+                     CountryModel country, List<StepModel> steps, List<RateModel> rates, ImageModel image) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -37,6 +38,7 @@ public class FoodModel {
         this.owner = owner;
         this.country = country;
         this.steps = steps;
+        this.rates = rates;
         this.image = image;
     }
 }

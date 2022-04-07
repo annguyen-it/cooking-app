@@ -54,4 +54,7 @@
     <string name="txt_details_votes">%1$d lượt đánh giá</string>
     <string name="txt_details_ingredients">Nguyên liệu: %1$s</string>
     <string name="txt_details_step">Bước %1$d: %2$s</string>
+    <string name="txt_details_rate_food">Đánh giá món ăn</string>
+    <string name="btn_details_rate_food">Gửi đánh giá</string>
+    <string name="txt_details_my_rate">Đánh giá của tôi</string>
 </resources>
