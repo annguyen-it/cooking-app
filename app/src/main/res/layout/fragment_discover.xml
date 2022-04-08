@@ -65,13 +65,12 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <GridView
-        android:id="@+id/grvFood"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/gridFood"
+        android:name="com.example.cookingapp.ui.fragment.gridFood.GridFoodFragment"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:horizontalSpacing="2dp"
-        android:numColumns="2"
-        android:verticalSpacing="2dp" />
+        tools:layout="@layout/fragment_grid_food" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

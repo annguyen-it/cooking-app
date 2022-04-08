@@ -75,6 +75,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getModelCountry(List<CountryModel> countryList) {
-        discoverViewModel.setCountry(countryList);
+        discoverViewModel.setCountries(countryList);
     }
 }

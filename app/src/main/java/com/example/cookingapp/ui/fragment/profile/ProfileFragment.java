@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.cookingapp.ui.activity.foodDetails.FoodDetailsActivity;
@@ -30,6 +31,13 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         final Intent activityIntent = requireActivity().getIntent();
         accountExtra = activityIntent.getStringExtra(BundleConstant.ACCOUNT);
 
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
         // Binding components
         final TextView txtName = view.findViewById(R.id.txtName);
         final ImageView imgAvatar = view.findViewById(R.id.imgAvatar);
@@ -42,8 +50,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         btnMyFood.setOnClickListener(this);
         imgAvatar.setOnClickListener(this);
         txtName.setText(userModel.fullName);
-
-        return view;
     }
 
     @Override

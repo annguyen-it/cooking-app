@@ -14,12 +14,12 @@ import com.example.cookingapp.data.model.FoodModel;
 
 import java.util.List;
 
-public class SearchFoodAdapter extends BaseAdapter {
+public class GridFoodAdapter extends BaseAdapter {
     private final Context context;
     private final int layout;
     private List<FoodModel> listFood;
 
-    public SearchFoodAdapter(Context context, int layout, List<FoodModel> listFood) {
+    public GridFoodAdapter(Context context, int layout, List<FoodModel> listFood) {
         this.context = context;
         this.layout = layout;
         this.listFood = listFood;

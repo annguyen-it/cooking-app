@@ -10,18 +10,13 @@ import java.util.List;
 
 
 public class DiscoverViewModel extends ViewModel {
+    private final MutableLiveData<List<CountryModel>> countries = new MutableLiveData<>();
 
-    private final MutableLiveData<List<CountryModel>> country;
-
-    public DiscoverViewModel() {
-        country = new MutableLiveData<>();
+    public LiveData<List<CountryModel>> getCountries() {
+        return countries;
     }
 
-    public LiveData<List<CountryModel>> getCountry(){
-        return country;
-    }
-
-    public void setCountry(List<CountryModel> lstCountry){
-        country.setValue(lstCountry);
+    public void setCountries(List<CountryModel> countriesList) {
+        countries.setValue(countriesList);
     }
 }
