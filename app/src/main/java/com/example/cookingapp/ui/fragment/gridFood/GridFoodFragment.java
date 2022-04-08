@@ -10,10 +10,10 @@ import android.widget.GridView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.cookingapp.R;
-import com.example.cookingapp.ui.activity.MainActivity;
 import com.example.cookingapp.ui.activity.foodDetails.FoodDetailsActivity;
 import com.example.cookingapp.ui.adapter.GridFoodAdapter;
 import com.example.cookingapp.ui.core.viewModel.FoodListViewModel;
@@ -40,7 +40,7 @@ public class GridFoodFragment extends Fragment {
         GridView grvFood = view.findViewById(R.id.grvFood);
         grvFood.setAdapter(searchFoodAdapter);
         grvFood.setOnItemClickListener((adapterView, view1, i, l) -> {
-            final MainActivity activity = (MainActivity) getActivity();
+            final FragmentActivity activity = getActivity();
             final Intent intent = new Intent(activity, FoodDetailsActivity.class);
             assert activity != null;
             intent.putExtra(BundleConstant.FOOD_ID, searchFoodAdapter.getItem(i).id);
