@@ -13,11 +13,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.cookingapp.ui.activity.foodDetails.FoodDetailsActivity;
 import com.example.cookingapp.R;
 import com.example.cookingapp.data.model.UserModel;
 import com.example.cookingapp.ui.activity.MainActivity;
 import com.example.cookingapp.ui.activity.addFood.AddFoodActivity;
+import com.example.cookingapp.ui.activity.foodList.MyFoodListActivity;
 import com.example.cookingapp.util.constant.BundleConstant;
 import com.example.cookingapp.util.helper.ObjectHelper;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -70,11 +70,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         }
         else if (id == R.id.btnMyFood) {
             final MainActivity activity = (MainActivity) getActivity();
-            final Intent intent = new Intent(activity, FoodDetailsActivity.class);
-            assert activity != null;
-            intent.putExtra(BundleConstant.FOOD_ID, 11)
-                .putExtra(BundleConstant.ACCOUNT, accountExtra);
-
+            final Intent intent = new Intent(activity, MyFoodListActivity.class);
             startActivity(intent);
         }
     }

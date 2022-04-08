@@ -18,7 +18,7 @@
     <string name="btn_sign_up">Đăng ký</string>
     <string name="txt_password_confirm">Xác nhận mật khẩu</string>
     <string name="txt_full_name">Họ và tên</string>
-    <string name="title_activity_add_food">AddFood</string>
+    <string name="title_activity_add_food">Thêm món ăn</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
@@ -59,4 +59,5 @@
     <string name="txt_details_my_rate">Đánh giá của tôi</string>
     <string name="txt_rate_comment">Hãy chia sẽ những điều bạn thích về món ăn</string>
     <string name="confirm">Xác nhận</string>
+    <string name="title_activity_my_food">Món ăn của tôi</string>
 </resources>

@@ -8,7 +8,6 @@ import com.example.cookingapp.data.model.FoodModel;
 
 import java.util.List;
 
-
 public class FoodListViewModel extends ViewModel {
     private final MutableLiveData<List<FoodModel>> foods = new MutableLiveData<>();
 

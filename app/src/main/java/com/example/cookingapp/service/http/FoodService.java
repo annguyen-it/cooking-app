@@ -1,11 +1,12 @@
 package com.example.cookingapp.service.http;
 
-import com.example.cookingapp.data.dto.LoginDto;
 import com.example.cookingapp.data.dto.RateDto;
 import com.example.cookingapp.data.model.FoodModel;
 import com.example.cookingapp.data.model.LoginModel;
 import com.example.cookingapp.data.model.RateModel;
 import com.example.cookingapp.data.model.SearchResponseModel;
+
+import java.util.List;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -24,6 +25,9 @@ public interface FoodService {
     Call<LoginModel> addNewFood(@Part MultipartBody.Part mainImage,
                                 @Part MultipartBody.Part[] stepImages,
                                 @Part("data") RequestBody data);
+
+    @GET("food")
+    Call<List<FoodModel>> getMyFood();
 
     @GET("food/{id}")
     Call<FoodModel> getFoodById(@Path("id") int id);

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -83,7 +84,6 @@ public class AddFoodActivity extends AppCompatActivity {
             }
         });
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,6 +110,12 @@ public class AddFoodActivity extends AppCompatActivity {
 
         // Load data
         loadCountriesData();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        finish();
+        return true;
     }
 
     public void changeImage(Button imageButtonHolder, AppImageView imageHolder) {
@@ -222,6 +228,7 @@ public class AddFoodActivity extends AppCompatActivity {
         spnCountry.setAdapter(adapter);
     }
 
+    @NonNull
     private AddNewFoodDto generateDto() throws Exception {
         final String name = txtFoodName.getText().toString();
         final String country = ((CountryModel) spnCountry.getSelectedItem()).code;

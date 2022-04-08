@@ -23,7 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.foodDetails.FoodDetailsActivity"/>
+        <activity android:name=".ui.activity.foodDetails.FoodDetailsActivity" />
         <activity android:name=".ui.activity.foodDetails.RateActivity" />
         <activity
             android:name=".ui.activity.login.LoginActivity"
@@ -35,7 +35,9 @@
         <activity
             android:name=".ui.activity.addFood.AddFoodActivity"
             android:exported="false"
-            android:label="@string/title_activity_add_food"
-            android:theme="@style/Theme.CookingApp.NoActionBar" />
+            android:label="@string/title_activity_add_food" />
+        <activity
+            android:name=".ui.activity.foodList.MyFoodListActivity"
+            android:label="@string/title_activity_my_food" />
     </application>
 </manifest>
