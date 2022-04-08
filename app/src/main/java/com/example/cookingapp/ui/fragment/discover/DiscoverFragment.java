@@ -51,7 +51,7 @@ public class DiscoverFragment extends Fragment {
     private CheckBox isVegetarian;
     private Button btnFilter;
 
-
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentDiscoverBinding.inflate(inflater, container, false);
@@ -79,7 +79,6 @@ public class DiscoverFragment extends Fragment {
             }
         };
         requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
-
     }
 
     @Override
@@ -140,6 +139,7 @@ public class DiscoverFragment extends Fragment {
     private void bindViewModels() {
         discoverViewModel = new ViewModelProvider(requireActivity()).get(DiscoverViewModel.class);
         foodListViewModel = new ViewModelProvider(requireActivity()).get(FoodListViewModel.class);
+//        foodListViewModel.setLoading(false);
     }
 
     private void addEventToComponents() {
@@ -190,6 +190,8 @@ public class DiscoverFragment extends Fragment {
     }
 
     private void filter() {
+        foodListViewModel.setLoading(true);
+
         new HttpService<>((MainActivity) getActivity()).instance(FoodService.class)
             .searchFood(txtSearch, isVegetarian.isChecked(), countrySearch)
             .enqueue(new Callback<SearchResponseModel>() {
@@ -201,6 +203,7 @@ public class DiscoverFragment extends Fragment {
 
                     SearchResponseModel responseModel = response.body();
                     foodListViewModel.setFoods(responseModel.foods);
+                    foodListViewModel.setLoading(false);
                 }
 
                 @Override

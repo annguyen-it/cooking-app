@@ -53,11 +53,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-    }
-
-    @Override
     public void onClick(@NonNull View view) {
         final int id = view.getId();
         if (id == R.id.btnAddFood) {

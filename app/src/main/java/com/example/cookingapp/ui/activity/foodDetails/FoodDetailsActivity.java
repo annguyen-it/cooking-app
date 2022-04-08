@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,6 +24,7 @@ import com.example.cookingapp.data.ui.FoodUiModel;
 import com.example.cookingapp.service.http.FoodService;
 import com.example.cookingapp.service.http.HttpService;
 import com.example.cookingapp.ui.adapter.StepAdapter;
+import com.example.cookingapp.ui.core.view.AppLoadingView;
 import com.example.cookingapp.util.constant.BundleConstant;
 import com.example.cookingapp.util.helper.ObjectHelper;
 import com.example.cookingapp.util.helper.UiHelper;
@@ -42,6 +42,7 @@ public class FoodDetailsActivity extends AppCompatActivity {
     private final StepAdapter<FoodDetailsActivity> stepAdapter = new StepAdapter<>(steps, this);
     private Context context;
 
+    private AppLoadingView loading;
     private ImageView imgDetailsFood;
     private TextView txtDetailsFoodName;
     private TextView txtUploadDate;
@@ -55,7 +56,6 @@ public class FoodDetailsActivity extends AppCompatActivity {
     private TextView txtDetailsIngredient;
     private TextView txtDetailsRateFood;
     private Button btnDetailsRateFood;
-    private ConstraintLayout layoutLoading;
 
     private FoodModel food;
     private UserModel user;
@@ -71,6 +71,7 @@ public class FoodDetailsActivity extends AppCompatActivity {
     }
 
     private void bindComponents() {
+        loading = findViewById(R.id.loading);
         imgDetailsFood = findViewById(R.id.imgDetailsFood);
         txtDetailsFoodName = findViewById(R.id.txtDetailsFoodName);
         txtUploadDate = findViewById(R.id.txtUploadDate);
@@ -84,7 +85,6 @@ public class FoodDetailsActivity extends AppCompatActivity {
         txtDetailsIngredient = findViewById(R.id.txtDetailsIngredient);
         txtDetailsRateFood = findViewById(R.id.txtDetailsRateFood);
         btnDetailsRateFood = findViewById(R.id.btnDetailsRateFood);
-        layoutLoading = findViewById(R.id.layoutLoading);
         final RecyclerView rvSteps = findViewById(R.id.layout_step_list);
 
         // Attach adapter to recycle view
@@ -108,7 +108,7 @@ public class FoodDetailsActivity extends AppCompatActivity {
 
                 final FoodModel data = response.body();
                 if (data != null) {
-                    UiHelper.fade(layoutLoading, 600);
+                    loading.fadeOut();
                     food = data;
                     bindData();
                 }

@@ -29,8 +29,7 @@ public class MyFoodListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_my_food);
 
         // Config action bar
-        UiHelper.displayActionBarNavigateBackButton( this);
-
+        UiHelper.displayActionBarNavigateBackButton(this);
 
         // Binding components
         foodListViewModel = new ViewModelProvider(this).get(FoodListViewModel.class);
@@ -49,12 +48,15 @@ public class MyFoodListActivity extends AppCompatActivity {
         final Callback<List<FoodModel>> callback = new Callback<List<FoodModel>>() {
             @Override
             public void onResponse(@NonNull Call<List<FoodModel>> call, @NonNull Response<List<FoodModel>> response) {
-                if (!response.isSuccessful() || response.body() == null) {
+                if (!response.isSuccessful()) {
                     return;
                 }
 
                 List<FoodModel> foods = response.body();
-                foodListViewModel.setFoods(foods);
+                if (foods != null) {
+                    foodListViewModel.setFoods(foods);
+                    foodListViewModel.setLoading(false);
+                }
             }
 
             @Override

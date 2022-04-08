@@ -82,7 +82,13 @@ public class UiHelper {
     }
 
     public static void fade(View view, int duration) {
-        AlphaAnimation animate = new AlphaAnimation(1, 0);
+        fade(view, duration, true);
+    }
+
+    public static void fade(View view, int duration, boolean fadeOut) {
+        AlphaAnimation animate = fadeOut
+                                 ? new AlphaAnimation(1, 0)
+                                 : new AlphaAnimation(0, 1);
         animate.setDuration(duration);
         animate.setFillAfter(true);
         view.startAnimation(animate);
