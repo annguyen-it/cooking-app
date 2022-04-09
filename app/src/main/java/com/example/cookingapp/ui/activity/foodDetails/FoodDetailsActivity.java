@@ -28,12 +28,11 @@ import com.example.cookingapp.ui.adapter.RatedAdapter;
 import com.example.cookingapp.ui.adapter.StepAdapter;
 import com.example.cookingapp.ui.core.view.AppLoadingView;
 import com.example.cookingapp.util.constant.BundleConstant;
+import com.example.cookingapp.util.helper.DateHelper;
 import com.example.cookingapp.util.helper.ObjectHelper;
 import com.example.cookingapp.util.helper.UiHelper;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 import retrofit2.Call;
@@ -60,7 +59,6 @@ public class FoodDetailsActivity extends AppCompatActivity {
     private TextView txtDetailsIngredient;
     private TextView txtDetailsRateFood;
     private Button btnDetailsRateFood;
-    private ListView lstViewRate;
 
     private FoodModel food;
     private UserModel user;
@@ -90,7 +88,7 @@ public class FoodDetailsActivity extends AppCompatActivity {
         txtDetailsIngredient = findViewById(R.id.txtDetailsIngredient);
         txtDetailsRateFood = findViewById(R.id.txtDetailsRateFood);
         btnDetailsRateFood = findViewById(R.id.btnDetailsRateFood);
-        lstViewRate = findViewById(R.id.lstViewRate);
+        final ListView lvwRate = findViewById(R.id.lstViewRate);
         final RecyclerView rvSteps = findViewById(R.id.layout_step_list);
 
         // Attach adapter to recycle view
@@ -98,7 +96,7 @@ public class FoodDetailsActivity extends AppCompatActivity {
         rvSteps.setLayoutManager(new LinearLayoutManager(this));
         rvSteps.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
-        lstViewRate.setAdapter(ratedAdapter);
+        lvwRate.setAdapter(ratedAdapter);
     }
 
     private void getFoodInfo() {
@@ -138,7 +136,7 @@ public class FoodDetailsActivity extends AppCompatActivity {
                                    : food.difficultLevel >= 3 ? 3 : 2;
 
         txtDetailsFoodName.setText(food.name);
-        txtUploadDate.setText(new SimpleDateFormat("dd/MM/yy", Locale.US).format(food.timePost));
+        txtUploadDate.setText(DateHelper.format(food.timePost));
         txtDetailsTime.setText(context.getString(R.string.txt_details_time_to_cook, food.timeToCook));
         txtDetailsCountry.setText(context.getString(R.string.txt_details_country, food.country.name));
         rtbDetailsRating.setRating(food.voteAvg);
@@ -173,6 +171,4 @@ public class FoodDetailsActivity extends AppCompatActivity {
 
         startActivity(intent);
     }
-
-
 }

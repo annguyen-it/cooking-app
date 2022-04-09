@@ -5,16 +5,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.example.cookingapp.R;
 import com.example.cookingapp.data.model.RateModel;
+import com.example.cookingapp.util.helper.DateHelper;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.Locale;
 
 public class RatedAdapter extends BaseAdapter {
     private final Context context;
@@ -26,6 +24,7 @@ public class RatedAdapter extends BaseAdapter {
         this.layout = layout;
         this.ratedModels = ratedModels;
     }
+
     public void setListRated(List<RateModel> ratedModels) {
         this.ratedModels = ratedModels;
         notifyDataSetChanged();
@@ -48,8 +47,14 @@ public class RatedAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
+        if (view == null) {
+            return null;
+        }
+
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        view = inflater.inflate(layout, null);
+        if (view != null) {
+            view = inflater.inflate(layout, null);
+        }
 
         //ImageView img = view.findViewById(R.id.img);
         TextView txtUserNameRated = view.findViewById(R.id.txtNameUserRated);
@@ -62,8 +67,7 @@ public class RatedAdapter extends BaseAdapter {
         txtUserNameRated.setText(rate.owner.fullName);
         rated.setRating(rate.rate);
         txtComment.setText(rate.comment);
-        txtTimeCreated.setText(new SimpleDateFormat("dd/MM/yy", Locale.US).format(rate.timeCreated));
-
+        txtTimeCreated.setText(DateHelper.format(rate.timeCreated));
 
         return view;
     }

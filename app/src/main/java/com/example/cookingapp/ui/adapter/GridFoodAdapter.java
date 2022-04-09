@@ -65,7 +65,7 @@ public class GridFoodAdapter<A extends FragmentActivity>
     }
 
     @Override
-    public void onItemClick(FoodModel item) {
+    public void onItemClick(@NonNull FoodModel item) {
         final Intent intent = new Intent(hostActivity, FoodDetailsActivity.class);
         final Intent activityIntent = hostActivity.getIntent();
         final String accountExtra = activityIntent.getStringExtra(BundleConstant.ACCOUNT);
