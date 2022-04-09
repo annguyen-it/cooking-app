@@ -61,4 +61,6 @@
     <string name="confirm">Xác nhận</string>
     <string name="title_activity_my_food">Món ăn của tôi</string>
     <string name="title_activity_rated_food">Món ăn đã đánh giá</string>
+    <string name="textview">TextView</string>
+    <string name="nh_gi">Đánh giá</string>
 </resources>
