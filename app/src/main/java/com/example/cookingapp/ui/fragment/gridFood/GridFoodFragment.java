@@ -9,7 +9,6 @@ import android.widget.GridView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.LifecycleOwner;
@@ -25,14 +24,16 @@ import com.example.cookingapp.util.constant.BundleConstant;
 import java.util.ArrayList;
 
 public class GridFoodFragment extends Fragment {
-    private GridFoodAdapter searchFoodAdapter;
+    private FragmentActivity hostActivity;
+    private GridFoodAdapter<? extends FragmentActivity> searchFoodAdapter;
     private AppLoadingView loading;
     private GridView grvFood;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_grid_food, container, false);
-        searchFoodAdapter = new GridFoodAdapter(getActivity(), R.layout.item_search_food, new ArrayList<>(), (AppCompatActivity) getActivity());
+        hostActivity = requireActivity();
+        searchFoodAdapter = new GridFoodAdapter<>(hostActivity, R.layout.item_search_food, new ArrayList<>());
 
         return view;
     }
@@ -54,11 +55,8 @@ public class GridFoodFragment extends Fragment {
 
     private void setEvents() {
         grvFood.setOnItemClickListener((adapterView, view1, i, l) -> {
-            final FragmentActivity activity = getActivity();
-            assert activity != null;
-
-            final Intent intent = new Intent(activity, FoodDetailsActivity.class);
-            final Intent activityIntent = requireActivity().getIntent();
+            final Intent intent = new Intent(hostActivity, FoodDetailsActivity.class);
+            final Intent activityIntent = hostActivity.getIntent();
             final String accountExtra = activityIntent.getStringExtra(BundleConstant.ACCOUNT);
 
             intent.putExtra(BundleConstant.FOOD_ID, searchFoodAdapter.getItem(i).id);
@@ -69,8 +67,7 @@ public class GridFoodFragment extends Fragment {
     }
 
     private void bindViewModels() {
-        final FoodListViewModel foodListViewModel =
-            new ViewModelProvider(requireActivity()).get(FoodListViewModel.class);
+        final FoodListViewModel foodListViewModel = new ViewModelProvider(hostActivity).get(FoodListViewModel.class);
         final LifecycleOwner viewLifecycleOwner = getViewLifecycleOwner();
         foodListViewModel.getFoods()
             .observe(viewLifecycleOwner, foodModels -> searchFoodAdapter.setListFood(foodModels));

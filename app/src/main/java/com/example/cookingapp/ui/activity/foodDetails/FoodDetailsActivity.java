@@ -43,7 +43,7 @@ import retrofit2.Response;
 public class FoodDetailsActivity extends AppCompatActivity {
     private final ArrayList<StepModel> steps = new ArrayList<>();
     private final StepAdapter<FoodDetailsActivity> stepAdapter = new StepAdapter<>(steps, this);
-    private final RatedAdapter ratedAdapter = new RatedAdapter(this,R.layout.item_rated,new ArrayList<>());
+    private final RatedAdapter ratedAdapter = new RatedAdapter(this, R.layout.item_rated, new ArrayList<>());
     private Context context;
 
     private AppLoadingView loading;
@@ -64,8 +64,6 @@ public class FoodDetailsActivity extends AppCompatActivity {
 
     private FoodModel food;
     private UserModel user;
-
-    private int foodId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -176,16 +174,16 @@ public class FoodDetailsActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void getRate(){
+    private void getRate() {
         Callback<List<RateModel>> callback = new Callback<List<RateModel>>() {
             @Override
-            public void onResponse(Call<List<RateModel>> call, Response<List<RateModel>> response) {
+            public void onResponse(@NonNull Call<List<RateModel>> call, @NonNull Response<List<RateModel>> response) {
                 if (!response.isSuccessful()) {
                     return;
                 }
                 final List<RateModel> data = response.body();
                 if (data != null) {
-                    UiHelper.fade(layoutLoading, 600);
+//                    UiHelper.fade(layoutLoading, 600);
 
                     ratedAdapter.setListRated(data);
 
@@ -193,12 +191,10 @@ public class FoodDetailsActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<RateModel>> call, Throwable t) {
-
-            }
+            public void onFailure(@NonNull Call<List<RateModel>> call, @NonNull Throwable t) { }
         };
         new HttpService<>(this).instance(FoodService.class)
-                .getRate(foodId)
-                .enqueue(callback);
+            .getRate(food.id)
+            .enqueue(callback);
     }
 }
