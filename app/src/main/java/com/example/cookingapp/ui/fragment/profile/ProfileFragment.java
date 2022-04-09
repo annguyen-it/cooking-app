@@ -2,7 +2,6 @@ package com.example.cookingapp.ui.fragment.profile;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.SyncStateContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,7 +55,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         btnMyFood.setOnClickListener(this);
         btnRated.setOnClickListener(this);
         imgAvatar.setOnClickListener(this);
+
         txtName.setText(userModel.fullName);
+        UiHelper.setImageBitmapAsync(imgAvatar, userModel.image.name, hostActivity);
     }
 
     @Override
