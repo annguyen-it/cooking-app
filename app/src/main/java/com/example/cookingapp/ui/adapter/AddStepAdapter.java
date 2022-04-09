@@ -19,10 +19,11 @@ import com.example.cookingapp.ui.core.event.AppTextWatcher;
 import com.example.cookingapp.ui.core.view.AppImageView;
 import com.example.cookingapp.util.helper.UiHelper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AddStepAdapter extends RecyclerView.Adapter<AddStepAdapter.ViewHolder> {
-    private final List<StepUiModel> steps;
+    private final List<StepUiModel> steps = new ArrayList<>();
     private final AddFoodActivity activity;
     private Context context;
 
@@ -30,8 +31,7 @@ public class AddStepAdapter extends RecyclerView.Adapter<AddStepAdapter.ViewHold
         return steps;
     }
 
-    public AddStepAdapter(AddFoodActivity activity, List<StepUiModel> steps) {
-        this.steps = steps;
+    public AddStepAdapter(AddFoodActivity activity) {
         this.activity = activity;
     }
 

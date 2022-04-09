@@ -1,7 +1,9 @@
 package com.example.cookingapp.util.helper;
 
+import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -38,7 +40,7 @@ public class UiHelper {
         Toast.makeText(context, text, Toast.LENGTH_LONG).show();
     }
 
-    public static <T extends AppCompatActivity> void hideKeyboard(T activity) {
+    public static <T extends Activity> void hideKeyboard(T activity) {
         try {
             ((InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE))
                 .hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
@@ -60,7 +62,7 @@ public class UiHelper {
         imageView.setImageBitmap(bitmap);
     }
 
-    public static <A extends AppCompatActivity> void setImageBitmapAsync(ImageView imageView, String imageName, A activity) {
+    public static <A extends ContextWrapper> void setImageBitmapAsync(ImageView imageView, String imageName, A context) {
         Callback<ResponseBody> callback = new Callback<ResponseBody>() {
             @Override
             public void onResponse(@NonNull Call<ResponseBody> call,
@@ -76,7 +78,7 @@ public class UiHelper {
             @Override
             public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) { }
         };
-        new HttpService<>(activity).instance(FileService.class)
+        new HttpService<>(context).instance(FileService.class)
             .getByName(imageName)
             .enqueue(callback);
     }

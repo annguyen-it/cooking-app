@@ -1,6 +1,6 @@
 package com.example.cookingapp.service.http;
 
-import androidx.appcompat.app.AppCompatActivity;
+import android.content.ContextWrapper;
 
 import com.example.cookingapp.util.constant.PreferencesConstant;
 import com.example.cookingapp.util.helper.DataHelper;
@@ -12,11 +12,11 @@ import okhttp3.Request;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class HttpService<A extends AppCompatActivity> {
-    private final A activity;
+public class HttpService<A extends ContextWrapper> {
+    private final A context;
 
-    public HttpService(A activity) {
-        this.activity = activity;
+    public HttpService(A context) {
+        this.context = context;
     }
 
     public <T> T instance(Class<T> type) {
@@ -36,7 +36,7 @@ public class HttpService<A extends AppCompatActivity> {
             .addInterceptor(new OkHttpProfilerInterceptor())
             .addInterceptor(chain -> {
                 final String accessToken =
-                    DataHelper.getPrefString(PreferencesConstant.ACCESS_TOKEN, activity);
+                    DataHelper.getPrefString(PreferencesConstant.ACCESS_TOKEN, context);
                 final Request original = chain.request();
 
                 if (accessToken.isEmpty()) {

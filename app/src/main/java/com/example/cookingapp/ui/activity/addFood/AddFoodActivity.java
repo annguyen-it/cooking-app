@@ -51,8 +51,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class AddFoodActivity extends AppCompatActivity {
-    private final ArrayList<StepUiModel> steps = new ArrayList<>();
-    private final AddStepAdapter addStepAdapter = new AddStepAdapter(this, steps);
+    private final AddStepAdapter addStepAdapter = new AddStepAdapter(this);
 
     private EditText txtFoodName;
     private Spinner spnCountry;
