@@ -9,15 +9,12 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cookingapp.R;
 import com.example.cookingapp.data.model.FoodModel;
-import com.example.cookingapp.util.helper.UiHelper;
 
 import java.util.List;
 

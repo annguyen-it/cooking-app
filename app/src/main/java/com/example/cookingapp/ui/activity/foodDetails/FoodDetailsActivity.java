@@ -147,6 +147,7 @@ public class FoodDetailsActivity extends AppCompatActivity {
         rtbDetailsDifficultLevel.setRating(difficultLevel);
         txtDetailsIngredient.setText(context.getString(R.string.txt_details_ingredients, food.ingredient));
         stepAdapter.addSteps(food.steps);
+        ratedAdapter.setListRated(food.rates);
 
         if (!food.isVegetarian) {
             txtDetailsIsVegetarian.setVisibility(View.GONE);
@@ -163,7 +164,6 @@ public class FoodDetailsActivity extends AppCompatActivity {
         else {
             btnDetailsRateFood.setOnClickListener(view -> rate());
         }
-        //getRate();
     }
 
     private void rate() {
@@ -174,27 +174,5 @@ public class FoodDetailsActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void getRate() {
-        Callback<List<RateModel>> callback = new Callback<List<RateModel>>() {
-            @Override
-            public void onResponse(@NonNull Call<List<RateModel>> call, @NonNull Response<List<RateModel>> response) {
-                if (!response.isSuccessful()) {
-                    return;
-                }
-                final List<RateModel> data = response.body();
-                if (data != null) {
-//                    UiHelper.fade(layoutLoading, 600);
 
-                    ratedAdapter.setListRated(data);
-
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<List<RateModel>> call, @NonNull Throwable t) { }
-        };
-        new HttpService<>(this).instance(FoodService.class)
-            .getRate(food.id)
-            .enqueue(callback);
-    }
 }
