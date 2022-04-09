@@ -88,8 +88,8 @@ public class FoodDetailsActivity extends AppCompatActivity {
         txtDetailsIngredient = findViewById(R.id.txtDetailsIngredient);
         txtDetailsRateFood = findViewById(R.id.txtDetailsRateFood);
         btnDetailsRateFood = findViewById(R.id.btnDetailsRateFood);
-        final ListView lvwRate = findViewById(R.id.lstViewRate);
         final RecyclerView rvSteps = findViewById(R.id.layout_step_list);
+        final ListView lvwRate = findViewById(R.id.lstViewRate);
 
         // Attach adapter to recycle view
         rvSteps.setAdapter(stepAdapter);

@@ -47,14 +47,8 @@ public class RatedAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        if (view == null) {
-            return null;
-        }
-
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        if (view != null) {
-            view = inflater.inflate(layout, null);
-        }
+        view = inflater.inflate(layout, null);
 
         //ImageView img = view.findViewById(R.id.img);
         TextView txtUserNameRated = view.findViewById(R.id.txtNameUserRated);
