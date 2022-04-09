@@ -18,17 +18,20 @@ import com.example.cookingapp.data.model.UserModel;
 import com.example.cookingapp.ui.activity.MainActivity;
 import com.example.cookingapp.ui.activity.addFood.AddFoodActivity;
 import com.example.cookingapp.ui.activity.foodList.MyFoodListActivity;
+import com.example.cookingapp.ui.activity.foodList.RatedFoodListActivity;
 import com.example.cookingapp.util.constant.BundleConstant;
 import com.example.cookingapp.util.helper.ObjectHelper;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class ProfileFragment extends Fragment implements View.OnClickListener {
-    String accountExtra;
+    private MainActivity hostActivity;
+    private String accountExtra;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_profile, container, false);
-        final Intent activityIntent = requireActivity().getIntent();
+        hostActivity = (MainActivity) requireActivity();
+        final Intent activityIntent = hostActivity.getIntent();
         accountExtra = activityIntent.getStringExtra(BundleConstant.ACCOUNT);
 
         return view;
@@ -43,11 +46,13 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         final ImageView imgAvatar = view.findViewById(R.id.imgAvatar);
         final FloatingActionButton btnAddFood = view.findViewById(R.id.btnAddFood);
         final Button btnMyFood = view.findViewById(R.id.btnMyFood);
+        final Button btnRated = view.findViewById(R.id.btnRated);
 
         // Add events
         final UserModel userModel = ObjectHelper.fromJson(accountExtra, UserModel.class);
         btnAddFood.setOnClickListener(this);
         btnMyFood.setOnClickListener(this);
+        btnRated.setOnClickListener(this);
         imgAvatar.setOnClickListener(this);
         txtName.setText(userModel.fullName);
     }
@@ -56,16 +61,20 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     public void onClick(@NonNull View view) {
         final int id = view.getId();
         if (id == R.id.btnAddFood) {
-            final MainActivity activity = (MainActivity) getActivity();
-            final Intent intent = new Intent(activity, AddFoodActivity.class);
-            assert activity != null;
-            intent.putParcelableArrayListExtra(BundleConstant.COUNTRY, activity.getCountryList());
+            final Intent intent = new Intent(hostActivity, AddFoodActivity.class);
+            assert hostActivity != null;
+            intent.putParcelableArrayListExtra(BundleConstant.COUNTRY, hostActivity.getCountryList());
 
             startActivity(intent);
         }
         else if (id == R.id.btnMyFood) {
-            final MainActivity activity = (MainActivity) getActivity();
-            final Intent intent = new Intent(activity, MyFoodListActivity.class);
+            final Intent intent = new Intent(hostActivity, MyFoodListActivity.class);
+            intent.putExtra(BundleConstant.ACCOUNT, accountExtra);
+            startActivity(intent);
+        }
+        else if (id == R.id.btnRated) {
+            final Intent intent = new Intent(hostActivity, RatedFoodListActivity.class);
+            intent.putExtra(BundleConstant.ACCOUNT, accountExtra);
             startActivity(intent);
         }
     }

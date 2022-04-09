@@ -54,9 +54,14 @@ public class GridFoodFragment extends Fragment {
     private void setEvents() {
         grvFood.setOnItemClickListener((adapterView, view1, i, l) -> {
             final FragmentActivity activity = getActivity();
-            final Intent intent = new Intent(activity, FoodDetailsActivity.class);
             assert activity != null;
+
+            final Intent intent = new Intent(activity, FoodDetailsActivity.class);
+            final Intent activityIntent = requireActivity().getIntent();
+            final String accountExtra = activityIntent.getStringExtra(BundleConstant.ACCOUNT);
+
             intent.putExtra(BundleConstant.FOOD_ID, searchFoodAdapter.getItem(i).id);
+            intent.putExtra(BundleConstant.ACCOUNT, accountExtra);
 
             startActivity(intent);
         });

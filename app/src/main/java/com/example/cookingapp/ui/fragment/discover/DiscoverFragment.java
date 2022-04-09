@@ -38,13 +38,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class DiscoverFragment extends Fragment {
-    private FragmentDiscoverBinding binding;
-    private ConstraintLayout layout;
-
+    private FragmentActivity hostActivity;
     private DiscoverViewModel discoverViewModel;
     private FoodListViewModel foodListViewModel;
     private SpinnerAdapter<CountryModel> adapterCountry;
 
+    private ConstraintLayout searchLayout;
     private Spinner cboCountry;
     private String txtSearch;
     private String countrySearch;
@@ -52,10 +51,8 @@ public class DiscoverFragment extends Fragment {
     private Button btnFilter;
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        binding = FragmentDiscoverBinding.inflate(inflater, container, false);
-        return binding.getRoot();
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return FragmentDiscoverBinding.inflate(inflater, container, false).getRoot();
     }
 
     @Override
@@ -65,26 +62,27 @@ public class DiscoverFragment extends Fragment {
         bindViewModels();
         addEventToComponents();
         observeViewModels();
+        hideMenuSearch();
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        hostActivity = requireActivity();
 
         OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
             @Override
             public void handleOnBackPressed() {
-                hideMenuSearch(layout);
+                if (searchLayout.getVisibility() != View.GONE) {
+                    hideMenuSearch();
+                }
+                else {
+                    hostActivity.onBackPressed();
+                }
             }
         };
-        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
+        hostActivity.getOnBackPressedDispatcher().addCallback(this, callback);
     }
 
     @Override
@@ -98,12 +96,12 @@ public class DiscoverFragment extends Fragment {
             searchView.setQueryHint("Nhập từ khóa");
             searchView.setFocusable(true);
 
-            searchView.setOnQueryTextFocusChangeListener((view, b) -> {
-                if (b) {
-                    showMenuSearch(layout);
+            searchView.setOnQueryTextFocusChangeListener((view, focus) -> {
+                if (focus) {
+                    showMenuSearch();
                 }
                 else {
-                    hideMenuSearch(layout);
+                    hideMenuSearch();
                 }
             });
 
@@ -129,17 +127,17 @@ public class DiscoverFragment extends Fragment {
     private void bindComponents(@NonNull View view) {
         txtSearch = "";
         countrySearch = "";
-        
-        layout = view.findViewById(R.id.layoutTimKiem);
+
+        searchLayout = view.findViewById(R.id.layoutTimKiem);
         cboCountry = view.findViewById(R.id.cboNuoc);
         isVegetarian = view.findViewById(R.id.ckbDoAnChay);
         btnFilter = view.findViewById(R.id.btnLoc);
     }
 
     private void bindViewModels() {
-        discoverViewModel = new ViewModelProvider(requireActivity()).get(DiscoverViewModel.class);
-        foodListViewModel = new ViewModelProvider(requireActivity()).get(FoodListViewModel.class);
-//        foodListViewModel.setLoading(false);
+        discoverViewModel = new ViewModelProvider(hostActivity).get(DiscoverViewModel.class);
+        foodListViewModel = new ViewModelProvider(hostActivity).get(FoodListViewModel.class);
+        foodListViewModel.setLoading(false);
     }
 
     private void addEventToComponents() {
@@ -154,39 +152,39 @@ public class DiscoverFragment extends Fragment {
             public void onNothingSelected(AdapterView<?> adapterView) { }
         });
     }
-    
+
     private void observeViewModels() {
         discoverViewModel.getCountries().observe(getViewLifecycleOwner(), countryModels -> {
             if (!countryModels.get(0).isDefaultValue()) {
                 countryModels.add(0, new CountryModel().defaultValue());
             }
-            adapterCountry = new SpinnerAdapter<>(requireActivity(), countryModels);
+            adapterCountry = new SpinnerAdapter<>(hostActivity, countryModels);
             cboCountry.setAdapter(adapterCountry);
         });
     }
 
-    private void showMenuSearch(@NonNull View view) {
-        view.setVisibility(View.VISIBLE);
+    private void showMenuSearch() {
+        searchLayout.setVisibility(View.VISIBLE);
         TranslateAnimation animate = new TranslateAnimation(
             0,                 // fromXDelta
             0,                 // toXDelta
-            view.getHeight(),  // fromYDelta
+            searchLayout.getHeight(),  // fromYDelta
             0);                // toYDelta
         animate.setDuration(500);
         animate.setFillAfter(true);
-        view.startAnimation(animate);
+        searchLayout.startAnimation(animate);
     }
 
-    private void hideMenuSearch(@NonNull View view) {
+    private void hideMenuSearch() {
         TranslateAnimation animate = new TranslateAnimation(
             0,                  // fromXDelta
             0,                  // toXDelta
             0,                  // fromYDelta
-            -view.getHeight()); // toYDelta
+            -searchLayout.getHeight()); // toYDelta
         animate.setDuration(500);
         animate.setFillAfter(true);
-        view.startAnimation(animate);
-        view.setVisibility(View.GONE);
+        searchLayout.startAnimation(animate);
+        searchLayout.setVisibility(View.GONE);
     }
 
     private void filter() {

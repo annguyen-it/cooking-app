@@ -29,6 +29,9 @@ public interface FoodService {
     @GET("food")
     Call<List<FoodModel>> getMyFood();
 
+    @GET("food/rated")
+    Call<List<FoodModel>> getRatedFood();
+
     @GET("food/{id}")
     Call<FoodModel> getFoodById(@Path("id") int id);
 

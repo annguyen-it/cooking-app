@@ -41,5 +41,8 @@
         <activity
             android:name=".ui.activity.foodList.MyFoodListActivity"
             android:label="@string/title_activity_my_food" />
+        <activity
+            android:name=".ui.activity.foodList.RatedFoodListActivity"
+            android:label="@string/title_activity_rated_food" />
     </application>
 </manifest>
