@@ -192,6 +192,8 @@
                     android:gravity="center"
                     android:paddingLeft="0dp"
                     android:paddingRight="0dp"
+                    android:textAlignment="textStart"
+                    app:flow_horizontalAlign="start"
                     app:drawableStartCompat="@drawable/ic_chef_hat"
                     app:flow_horizontalAlign="start"
                     app:layout_constraintStart_toStartOf="parent"

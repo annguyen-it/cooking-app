@@ -9,8 +9,6 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
-
 import com.example.cookingapp.R;
 import com.example.cookingapp.data.model.RateModel;
 
@@ -53,7 +51,7 @@ public class RatedAdapter extends BaseAdapter {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         view = inflater.inflate(layout, null);
 
-        ImageView img = view.findViewById(R.id.img);
+        //ImageView img = view.findViewById(R.id.img);
         TextView txtUserNameRated = view.findViewById(R.id.txtNameUserRated);
         RatingBar rated = view.findViewById(R.id.rtbRated);
         TextView txtComment = view.findViewById(R.id.txtCmt);
