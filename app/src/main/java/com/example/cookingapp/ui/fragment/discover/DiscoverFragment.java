@@ -178,14 +178,16 @@ public class DiscoverFragment extends Fragment {
     }
 
     private void hideMenuSearch(@NonNull View view) {
-        TranslateAnimation animate = new TranslateAnimation(
-            0,                  // fromXDelta
-            0,                  // toXDelta
-            0,                  // fromYDelta
-            -view.getHeight()); // toYDelta
-        animate.setDuration(500);
-        animate.setFillAfter(true);
-        view.startAnimation(animate);
+        if (view.getVisibility() == View.VISIBLE) {
+            TranslateAnimation animate = new TranslateAnimation(
+                    0,                  // fromXDelta
+                    0,                  // toXDelta
+                    0,                  // fromYDelta
+                    -view.getHeight()); // toYDelta
+            animate.setDuration(500);
+            animate.setFillAfter(true);
+            view.startAnimation(animate);
+        }
         view.setVisibility(View.GONE);
     }
 
@@ -201,6 +203,8 @@ public class DiscoverFragment extends Fragment {
 
                     SearchResponseModel responseModel = response.body();
                     foodListViewModel.setFoods(responseModel.foods);
+
+
                 }
 
                 @Override

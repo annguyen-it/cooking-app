@@ -2,6 +2,7 @@ package com.example.cookingapp.ui.fragment.profile;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.SyncStateContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import com.example.cookingapp.ui.activity.addFood.AddFoodActivity;
 import com.example.cookingapp.ui.activity.foodList.MyFoodListActivity;
 import com.example.cookingapp.util.constant.BundleConstant;
 import com.example.cookingapp.util.helper.ObjectHelper;
+import com.example.cookingapp.util.helper.UiHelper;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class ProfileFragment extends Fragment implements View.OnClickListener {

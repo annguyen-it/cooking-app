@@ -9,6 +9,7 @@ import android.widget.GridView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -27,7 +28,7 @@ public class GridFoodFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_grid_food, container, false);
-        searchFoodAdapter = new GridFoodAdapter(getActivity(), R.layout.item_search_food, new ArrayList<>());
+        searchFoodAdapter = new GridFoodAdapter(getActivity(), R.layout.item_search_food, new ArrayList<>(), (AppCompatActivity) getActivity());
 
         return view;
     }

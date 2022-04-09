@@ -39,4 +39,7 @@ public interface FoodService {
     Call<SearchResponseModel> searchFood(@Query("q") String q,
                                          @Query("isVegetarian") Boolean isVegetarian,
                                          @Query("country") String country);
+
+    @GET("food/{id}/rating")
+    Call<List<RateModel>> getRate(@Path("id") int id);
 }
