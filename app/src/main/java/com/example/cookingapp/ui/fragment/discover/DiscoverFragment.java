@@ -32,6 +32,7 @@ import com.example.cookingapp.service.http.HttpService;
 import com.example.cookingapp.ui.activity.MainActivity;
 import com.example.cookingapp.ui.core.adapter.SpinnerAdapter;
 import com.example.cookingapp.ui.core.viewModel.FoodListViewModel;
+import com.example.cookingapp.ui.fragment.dialog.ExitAppDialogFragment;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -78,7 +79,7 @@ public class DiscoverFragment extends Fragment {
                     hideMenuSearch();
                 }
                 else {
-                    hostActivity.onBackPressed();
+                    new ExitAppDialogFragment(hostActivity).show(getParentFragmentManager(), "exit");
                 }
             }
         };
