@@ -26,4 +26,8 @@ public class DataHelper {
     public static <T extends ContextWrapper> String getPrefString(String key, T context) {
         return getPrefString(key, context, "");
     }
+
+    public static <T extends ContextWrapper> void deleteSharedPreferences(T context) {
+        context.deleteSharedPreferences(AppSetting.SHARED_PREFERENCE_FILE);
+    }
 }

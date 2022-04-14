@@ -87,13 +87,13 @@ public class SignUpActivity extends AppCompatActivity {
 
             btnSignUp.setEnabled(false);
 
-            try {
-                password = StringHelper.GetMd5Hash(password);
-            }
-            catch (NoSuchAlgorithmException e) {
-                e.printStackTrace();
-                return;
-            }
+//            try {
+//                password = StringHelper.GetMd5Hash(password);
+//            }
+//            catch (NoSuchAlgorithmException e) {
+//                e.printStackTrace();
+//                return;
+//            }
 
             final String finalPassword = password;
             final SignUpDto signUpDto = new SignUpDto(fullName, username, finalPassword);

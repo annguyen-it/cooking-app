@@ -103,10 +103,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void addEventToSignUpText() {
-        txtSignUp.setOnClickListener(view -> {
-            startActivity(new Intent(this, SignUpActivity.class));
-            finish();
-        });
+        txtSignUp.setOnClickListener(view -> startActivity(new Intent(this, SignUpActivity.class)));
     }
 
     private void showToast(String text) {

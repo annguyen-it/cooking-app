@@ -19,7 +19,9 @@ import com.example.cookingapp.ui.activity.MainActivity;
 import com.example.cookingapp.ui.activity.addFood.AddFoodActivity;
 import com.example.cookingapp.ui.activity.foodList.MyFoodListActivity;
 import com.example.cookingapp.ui.activity.foodList.RatedFoodListActivity;
+import com.example.cookingapp.ui.activity.loading.LoadingActivity;
 import com.example.cookingapp.util.constant.BundleConstant;
+import com.example.cookingapp.util.helper.DataHelper;
 import com.example.cookingapp.util.helper.ObjectHelper;
 import com.example.cookingapp.util.helper.UiHelper;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -48,6 +50,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         final FloatingActionButton btnAddFood = view.findViewById(R.id.btnAddFood);
         final Button btnMyFood = view.findViewById(R.id.btnMyFood);
         final Button btnRated = view.findViewById(R.id.btnRated);
+        final Button btnLogOut = view.findViewById(R.id.btnLogOut);
 
         // Add events
         final UserModel userModel = ObjectHelper.fromJson(accountExtra, UserModel.class);
@@ -55,9 +58,13 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         btnMyFood.setOnClickListener(this);
         btnRated.setOnClickListener(this);
         imgAvatar.setOnClickListener(this);
+        btnLogOut.setOnClickListener(this);
 
         txtName.setText(userModel.fullName);
-        UiHelper.setImageBitmapAsync(imgAvatar, userModel.image.name, hostActivity);
+
+        if (userModel.image != null) {
+            UiHelper.setImageBitmapAsync(imgAvatar, userModel.image.name, hostActivity);
+        }
     }
 
     @Override
@@ -79,6 +86,10 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
             final Intent intent = new Intent(hostActivity, RatedFoodListActivity.class);
             intent.putExtra(BundleConstant.ACCOUNT, accountExtra);
             startActivity(intent);
+        }
+        else if (id == R.id.btnLogOut) {
+            DataHelper.deleteSharedPreferences(hostActivity);
+            startActivity(new Intent(hostActivity, LoadingActivity.class));
         }
     }
 }
