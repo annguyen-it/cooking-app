@@ -169,7 +169,7 @@ public class AddFoodActivity extends AppCompatActivity {
             // Main image
             final Uri mainImageFileUri = UiHelper.getUri(getApplicationContext(), imgFood.getId());
             final File mainImageFile = new File(mainImageFileUri.getPath());
-            final RequestBody mainImage = RequestBody.create(HttpConstant.IMAGE, mainImageFile);
+            final RequestBody mainImage = RequestBody.create(mainImageFile, HttpConstant.IMAGE);
             final MultipartBody.Part mainImagePart =
                 MultipartBody.Part.createFormData("mainImage", mainImageFile.getName(), mainImage);
 
@@ -184,7 +184,7 @@ public class AddFoodActivity extends AppCompatActivity {
 
                 final Uri fileUri = UiHelper.getUri(getApplicationContext(), stepView.imgStep.getId());
                 final File file = new File(fileUri.getPath());
-                final RequestBody stepBody = RequestBody.create(HttpConstant.IMAGE, file.getName());
+                final RequestBody stepBody = RequestBody.create(file.getName(), HttpConstant.IMAGE);
                 stepImageParts[i] = MultipartBody.Part.createFormData("stepImage", file.getName(), stepBody);
 
                 final StepUiModel stepData = addStepAdapter.getSteps().get(i);
@@ -192,7 +192,7 @@ public class AddFoodActivity extends AppCompatActivity {
                     new AddNewFoodDto.AddNewFoodStepDto(stepData.getName(), stepData.getDescription()));
             }
 
-            final RequestBody requestBody = RequestBody.create(HttpConstant.JSON, ObjectHelper.toJson(addNewFoodDto));
+            final RequestBody requestBody = RequestBody.create(ObjectHelper.toJson(addNewFoodDto), HttpConstant.JSON);
 
             new HttpService<>(this).instance(FoodService.class)
                 .addNewFood(mainImagePart, stepImageParts, requestBody)

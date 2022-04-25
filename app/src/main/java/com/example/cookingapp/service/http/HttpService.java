@@ -9,6 +9,7 @@ import com.localebro.okhttpprofiler.OkHttpProfilerInterceptor;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -31,9 +32,13 @@ public class HttpService<A extends ContextWrapper> {
     }
 
     private OkHttpClient buildClient() {
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+
         return new OkHttpClient
             .Builder()
             .addInterceptor(new OkHttpProfilerInterceptor())
+            .addInterceptor(logging)
             .addInterceptor(chain -> {
                 final String accessToken =
                     DataHelper.getPrefString(PreferencesConstant.ACCESS_TOKEN, context);

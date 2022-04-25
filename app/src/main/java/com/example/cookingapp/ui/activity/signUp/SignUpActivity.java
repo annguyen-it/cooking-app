@@ -16,10 +16,7 @@ import com.example.cookingapp.service.http.AccountService;
 import com.example.cookingapp.service.http.HttpService;
 import com.example.cookingapp.util.constant.PreferencesConstant;
 import com.example.cookingapp.util.helper.DataHelper;
-import com.example.cookingapp.util.helper.StringHelper;
 import com.example.cookingapp.util.helper.UiHelper;
-
-import java.security.NoSuchAlgorithmException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -86,14 +83,6 @@ public class SignUpActivity extends AppCompatActivity {
             }
 
             btnSignUp.setEnabled(false);
-
-//            try {
-//                password = StringHelper.GetMd5Hash(password);
-//            }
-//            catch (NoSuchAlgorithmException e) {
-//                e.printStackTrace();
-//                return;
-//            }
 
             final String finalPassword = password;
             final SignUpDto signUpDto = new SignUpDto(fullName, username, finalPassword);

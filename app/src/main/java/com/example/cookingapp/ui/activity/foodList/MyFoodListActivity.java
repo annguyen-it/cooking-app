@@ -64,7 +64,7 @@ public class MyFoodListActivity extends AppCompatActivity {
         };
 
         new HttpService<>(this).instance(FoodService.class)
-            .getMyFood()
+            .getMyFood(1, 0)
             .enqueue(callback);
     }
 }

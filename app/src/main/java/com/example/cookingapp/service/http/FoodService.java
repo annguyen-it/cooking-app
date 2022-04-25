@@ -26,8 +26,8 @@ public interface FoodService {
                                 @Part MultipartBody.Part[] stepImages,
                                 @Part("data") RequestBody data);
 
-    @GET("food")
-    Call<List<FoodModel>> getMyFood();
+    @GET("food/me")
+    Call<List<FoodModel>> getMyFood(@Query("page_num") int pageNum, @Query("page_size") int pageSize);
 
     @GET("food/rated")
     Call<List<FoodModel>> getRatedFood();
